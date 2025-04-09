@@ -1,0 +1,41 @@
+.input-wrapper {
+    position: relative;
+    width: 100%;
+  
+    .input-label {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+  
+    .input-field {
+      width: -webkit-fill-available;
+      padding: 12px;
+      padding-top: 20px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      background: #1a1a1a;
+  
+      &:focus {
+        border-color: #ff5722;
+      }
+    }
+  
+    &.active .input-label {
+      top: 0px;
+      font-size: 0.75rem;
+      color: #ff5722;
+      z-index: 3;
+      background: #1a1a1a;
+    }
+  }
+  

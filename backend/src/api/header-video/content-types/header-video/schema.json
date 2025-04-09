@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "header_videos",
+  "info": {
+    "singularName": "header-video",
+    "pluralName": "header-videos",
+    "displayName": "HeaderVideo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "video": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

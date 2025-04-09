@@ -1,0 +1,93 @@
+.aboutUs {
+  padding: 40px 0;
+  &-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  &-title {
+    font-size: 35px;
+    font-weight: 900;
+  }
+
+  &-mainTitle {
+    font-size: 60px;
+    text-align: center;
+  }
+
+  &-content {
+    p {
+      font-size: 23px;
+    }
+
+    &__img {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      img {
+        width: 80%;
+      }
+    }
+  }
+}
+
+.aboutUs-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+
+  .aboutUs-title {
+    grid-column: span 2;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ff5722;
+  }
+
+  .aboutUs-content {
+    display: contents; // використовуємо "contents", щоб впорядкувати в grid
+  }
+
+  .aboutUs-content:nth-of-type(even) img {
+    grid-column: 2;
+    grid-row: span 1;
+  }
+
+  .aboutUs-content:nth-of-type(even) p {
+    grid-column: 1;
+  }
+
+  .aboutUs-content:nth-of-type(odd) img {
+    grid-column: 1;
+  }
+
+  .aboutUs-content:nth-of-type(odd) p {
+    grid-column: 2;
+  }
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    height: 450px;
+    object-fit: cover;
+  }
+
+  p {
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    height: 400px;
+    background: #494848;
+    border-radius: 10px;
+    color: #efeaea;
+    font-weight: 900;
+  }
+}

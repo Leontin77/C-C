@@ -1,0 +1,34 @@
+.navigationMenu {
+  &-list {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+    &__item {
+      position: relative;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+      font-size: 20px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background-color: #ff5722;
+        transition: width 0.3s ease-in-out;
+      }
+
+      &:hover {
+        color: #ff5722;
+        font-weight: bold;
+
+        &:after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

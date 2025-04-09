@@ -1,0 +1,57 @@
+.upcomingEventItem {
+  border: 2px solid  rgba(255, 87, 34, 0.6);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 20px;
+  gap: 15px;
+
+  &-date {
+    font-size: 19px;
+    font-weight: 900;
+  }
+
+  &-location {
+    margin-left: 40px;
+    font-size: 25px;
+    font-weight: 900;
+  }
+
+  &-button {
+    margin-left: auto;
+    background: #ff2d22;
+    border-radius: 10px;
+
+    &:hover {
+      background: transparent;
+      color: #fff;
+    }
+  }
+}
+
+.upcomingEventItemDescr {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-descr {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 10px;
+
+        .text {
+            font-size: 20px;
+            font-weight: 900;
+        }
+    }
+
+    &-description {
+        padding: 10px;
+        .text {
+            font-size: 17px;
+        }
+    }
+}

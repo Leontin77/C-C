@@ -1,0 +1,122 @@
+.footer {
+  padding: 50px 90px;
+  background: #1a1a1a;
+
+  &-title {
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 10px;
+  }
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+
+      &-title {
+        font-size: 25px;
+        font-weight: 900;
+        margin-bottom: 25px;
+        letter-spacing: 1.5px;
+        margin-top: 10px;
+        color: #ff5722;
+      }
+
+      &-input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+
+        .button {
+          background: #ff2d22;
+          border-radius: 10px;
+          width: 100%;
+        }
+      }
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        li {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          cursor: pointer;
+        }
+
+        &__item {
+          position: relative;
+          cursor: pointer;
+          transition: color 0.3s ease-in-out;
+          font-size: 17px;
+
+          &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: #ff5722;
+            transition: width 0.3s ease-in-out;
+          }
+
+          &:hover {
+            color: #ff5722;
+            font-weight: bold;
+
+            &:after {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .social {
+    &-list {
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      gap: 20px;
+      cursor: pointer;
+      margin: 20px 0;
+
+      li {
+        border: 1px solid #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+
+        &:hover {
+          color: #ff5722;
+          cursor: pointer;
+          transform: rotate(360deg);
+          border: 1px solid #ff5722;
+        }
+      }
+    }
+  }
+
+  .allRights {
+    width: 100%;
+    color: #a1a0a0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+}
