@@ -1,5 +1,5 @@
 import { useState, FocusEvent } from "react";
-import "./TextArea.scss";
+import "./Textarea.scss";
 
 interface FloatingLabelTextAreaProps {
   label: string;
