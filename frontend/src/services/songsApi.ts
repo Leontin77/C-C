@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BASE_URL } from '../shared/const/url';
 
 interface Song {
   id: number;
@@ -17,7 +18,7 @@ interface Song {
 
 export const songsApi = createApi({
   reducerPath: 'songsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:1337/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getSongs: builder.query<Song[], void>({  
       query: () => `songs?populate[album][populate]=cover&populate=audio`,

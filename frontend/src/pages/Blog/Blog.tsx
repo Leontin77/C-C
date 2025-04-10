@@ -35,8 +35,8 @@ export const Blog = () => {
           style={{ display: openComments ? "block" : "none" }}
         >
           <h4>Please, leave a comment</h4>
-          <Input />
-          <Input />
+          <Input label="Name"/>
+          <Input label="Comment"/>
           <Button className="button">Send</Button>
         </div>
       </div>

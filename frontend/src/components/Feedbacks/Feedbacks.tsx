@@ -1,16 +1,29 @@
-import "./Feedbacks.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { useGetFeedbacksQuery } from "../../services/feedbackApi";
+import { BASE_URL } from "../../shared/const/url";
+
+import "./Feedbacks.scss";
+
+interface Feedback {
+  id: string;
+  text: string;
+  name: string;
+  age: number;
+  img: {
+    formats?: {
+      medium?: { url: string };
+    };
+    url: string;
+  }[];
+}
 
 interface FeedbacksProps {
   autoplay?: boolean;
   id?: string;
 }
-
-const BASE_URL = "http://localhost:1337";
 
 export const Feedbacks = ({ autoplay }: FeedbacksProps) => {
   const settings = {
@@ -30,7 +43,7 @@ export const Feedbacks = ({ autoplay }: FeedbacksProps) => {
       <h3 className="feedbacksHeader">WHAT PEOPLE SAY</h3>
       <div className="feedbacks">
         <Slider {...settings} className="feedbacks-slider">
-          {data?.data?.map((item) => {
+          {data?.data?.map((item: Feedback) => {
             return (
               <div className="feedbacks-carousel">
                 <img
@@ -55,4 +68,4 @@ export const Feedbacks = ({ autoplay }: FeedbacksProps) => {
   );
 };
 
-export default Feedbacks
+export default Feedbacks;

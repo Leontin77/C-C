@@ -5,6 +5,8 @@ import { ticketApi } from "../services/ticketApi";
 import { feedbackApi } from "../services/feedbackApi";
 import { blogApi } from "../services/blogApi";
 
+import modalReducer from '../store/modal/modal.slice'
+
 export const store = configureStore({
   reducer: {
     // додаємо API редюсери
@@ -13,6 +15,8 @@ export const store = configureStore({
     [ticketApi.reducerPath]: ticketApi.reducer,
     [feedbackApi.reducerPath]: feedbackApi.reducer,
     [blogApi.reducerPath]: blogApi.reducer,
+
+    modal: modalReducer,
 
   },
   middleware: (getDefaultMiddleware) =>
@@ -24,3 +28,5 @@ export const store = configureStore({
       blogApi.middleware
     ), // Додаємо middleware для headerApi
 });
+
+export type RootState = ReturnType<typeof store.getState>;

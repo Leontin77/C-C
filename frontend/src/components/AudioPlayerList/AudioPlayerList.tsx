@@ -4,14 +4,18 @@ import ReactAudioPlayer from "react-audio-player";
 import "./AudioPlayerList.scss";
 
 interface Song {
-  data: [];
   name: string;
   url: string;
   albumName: string;
+  coverImageUrl?: string;
 }
 
 interface AudioPlayerListProps {
-  album: Song[];
+  album: {
+    albumName: string;
+    coverImageUrl: string;
+    audio: Song[];
+  };
 }
 
 const AudioPlayerList: React.FC<AudioPlayerListProps> = ({ album }) => {

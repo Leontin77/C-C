@@ -2,29 +2,45 @@ import { Slider } from "../UI/Slider/Slider";
 import { useGetSongsQuery } from "../../services/songsApi.ts";
 import "react-jinke-music-player/assets/index.css";
 import "./LatestReleases.scss";
+import { BASE_URL } from "../../shared/const/url.ts";
 
-const BACKEND_URL = "http://localhost:1337";
+interface Song {
+  name: string;
+  url: string;
+}
 
- const LatestReleases = () => {
-  const { data: songs, error, isLoading } = useGetSongsQuery();
+interface Album {
+  albumName: string;
+  coverImageUrl: string;
+  audio: Song[];
+}
+
+interface SongsApiResponse {
+  data: Array<{
+    album: {
+      title: string;
+      cover: Array<{ url: string }>;
+    };
+    audio: Array<{ name: string; url: string }>;
+  }>;
+}
+
+const LatestReleases = () => {
+  const { data: songs, isLoading } = useGetSongsQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
   const albumsMap: { [key: string]: Album } = {};
 
   if (songs && songs?.data) {
-    songs?.data.forEach((item: any) => {
+    songs?.data.forEach((item) => {
       const albumName = item.album.title;
-      const coverImageUrl = `${BACKEND_URL}${item.album.cover[0].url}`;
-      const audio = item.audio.map((song: any) => ({
+      const coverImageUrl = `${BASE_URL}${item.album.cover[0].url}`;
+      const audio = item.audio.map((song) => ({
         name: song.name,
-        url: `${BACKEND_URL}${song.url}`,
+        url: `${BASE_URL}${song.url}`,
       }));
 
       if (albumsMap[albumName]) {
@@ -51,4 +67,4 @@ const BACKEND_URL = "http://localhost:1337";
   );
 };
 
-export default LatestReleases
+export default LatestReleases;

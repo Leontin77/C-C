@@ -7,6 +7,7 @@ import { Button } from "../UI/Button/Button";
 import song from "../../assets/songs/dovi.mp3";
 
 import "./Header.scss";
+import { BASE_URL } from "../../shared/const/url";
 
 export const Header = () => {
   const text = "CATTLE & CANE".split("");
@@ -22,7 +23,7 @@ export const Header = () => {
 
   const { data } = useGetHeaderVideoQuery(undefined);
   const videoUrl = data?.data?.[0]?.video?.[0]?.url;
-  const fullVideoUrl = videoUrl ? `http://localhost:1337${videoUrl}` : null;
+  const fullVideoUrl = videoUrl ? `${BASE_URL}${videoUrl}` : null;
 
   return (
     <header className="header">

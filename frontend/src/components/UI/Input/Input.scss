@@ -23,7 +23,7 @@
       border-radius: 6px;
       outline: none;
       transition: border-color 0.3s ease;
-      background: #1a1a1a;
+      background: transparent;
   
       &:focus {
         border-color: #ff5722;
@@ -35,7 +35,7 @@
       font-size: 0.75rem;
       color: #ff5722;
       z-index: 3;
-      background: #1a1a1a;
+      background: rgba(53, 52, 52, 0.9);
     }
   }
   

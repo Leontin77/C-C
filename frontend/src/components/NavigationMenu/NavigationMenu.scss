@@ -32,3 +32,25 @@
     }
   }
 }
+.modal-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .button {
+    background: #ff5722;
+    &:hover {
+      background: transparent;
+    }
+  }
+  .input-wrapper {
+    &.active .input-label {
+      background: rgb(86, 84, 84);
+    }
+  }
+  .textarea-wrapper {
+    &.active .textarea-label {
+      background: rgb(86, 84, 84);
+    }
+  }
+}

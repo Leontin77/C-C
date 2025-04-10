@@ -1,47 +1,44 @@
 import { useState, FocusEvent } from "react";
-import "./Input.scss";
+import "./TextArea.scss";
 
-interface FloatingLabelInputProps {
+interface FloatingLabelTextAreaProps {
   label: string;
   id?: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   required?: boolean;
 }
 
-export const Input = ({
+export const Textarea = ({
   label,
   id,
   value,
   onChange,
-  type = "text",
   name,
   required = false,
-}: FloatingLabelInputProps) => {
+}: FloatingLabelTextAreaProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => setIsFocused(true);
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (e: FocusEvent<HTMLTextAreaElement>) => {
     if (!e.target.value) setIsFocused(false);
   };
 
   return (
-    <div className={`input-wrapper ${isFocused || value ? "active" : ""}`}>
-      <label htmlFor={id} className="input-label">
+    <div className={`textarea-wrapper ${isFocused || value ? "active" : ""}`}>
+      <label htmlFor={id} className="textarea-label">
         {label}
       </label>
-      <input
+      <textarea
         id={id}
         name={name}
-        type={type}
         value={value}
         onChange={onChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         required={required}
-        className="input-field"
+        className="textarea-field"
       />
     </div>
   );
