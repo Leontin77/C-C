@@ -50,8 +50,6 @@ export const Slider: React.FC<SliderProps> = ({
       };
   };
 
-  console.log("data555", data);
-
   return (
     <div className="slider-container">
       <div className="slideC">
