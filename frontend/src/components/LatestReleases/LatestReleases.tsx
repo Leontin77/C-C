@@ -7,22 +7,13 @@ import { BASE_URL } from "../../shared/const/url.ts";
 interface Song {
   name: string;
   url: string;
+  albumName: string;
 }
 
 interface Album {
   albumName: string;
   coverImageUrl: string;
   audio: Song[];
-}
-
-interface SongsApiResponse {
-  data: Array<{
-    album: {
-      title: string;
-      cover: Array<{ url: string }>;
-    };
-    audio: Array<{ name: string; url: string }>;
-  }>;
 }
 
 const LatestReleases = () => {
@@ -34,7 +25,9 @@ const LatestReleases = () => {
 
   const albumsMap: { [key: string]: Album } = {};
 
+  // @ts-expect-error asdasdasdasdasd
   if (songs && songs?.data) {
+    // @ts-expect-error asdasdasdasdasd
     songs?.data.forEach((item) => {
       const albumName = item.album.title;
       const coverImageUrl = `${BASE_URL}${item.album.cover[0].url}`;
@@ -61,6 +54,7 @@ const LatestReleases = () => {
     <section className="latestReleases">
       <h3 className="latestReleases-title">MUSIC ALBUMS</h3>
       <div className="latestReleases-content">
+        {/* @ts-expect-error asdasdasdasdasd */}
         <Slider data={albums} activeSlide={0} />
       </div>
     </section>

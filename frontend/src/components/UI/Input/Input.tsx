@@ -4,8 +4,8 @@ import "./Input.scss";
 interface FloatingLabelInputProps {
   label: string;
   id?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   name?: string;
   required?: boolean;

@@ -29,7 +29,8 @@
     "react-slick": "^0.30.3",
     "react-soundplayer": "^1.0.5",
     "slick-carousel": "^1.8.1",
-    "three": "^0.174.0"
+    "three": "^0.174.0",
+    "emailjs-com": "^3.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

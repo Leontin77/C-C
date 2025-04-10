@@ -9,7 +9,7 @@ import "./Slider.scss";
 import AudioPlayerList from "../../AudioPlayerList/AudioPlayerList";
 
 interface SliderProps {
-  data: any;
+  data: [];
   activeSlide: number;
 }
 
@@ -105,7 +105,7 @@ export const Slider: React.FC<SliderProps> = ({
 interface SlideItem {
   albumName: string;
   coverImageUrl: string;
-  audio: { name: string; url: string }[];
+  audio: { name: string; url: string; albumName: string; }[];
   bgColor: string;
 }
 
