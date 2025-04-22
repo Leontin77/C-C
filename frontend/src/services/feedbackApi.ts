@@ -6,7 +6,7 @@ export const feedbackApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getFeedbacks: builder.query({
-      query: () => 'feedbacks?populate=*',
+      query: () => '/api/feedbacks?populate=*',
     }),
   }),
 });

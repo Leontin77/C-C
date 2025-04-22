@@ -6,7 +6,7 @@ export const headerApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getHeaderVideo: builder.query({
-      query: () => '/header-videos?populate=video',
+      query: () => '/api/header-videos?populate=video'
     }),
   }),
 });

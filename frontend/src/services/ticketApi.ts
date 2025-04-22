@@ -7,7 +7,7 @@ export const ticketApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getTickets: builder.query({
-      query: () => 'tickets?populate=*', 
+      query: () => '/api/tickets?populate=*', 
     }),
   }),
 });

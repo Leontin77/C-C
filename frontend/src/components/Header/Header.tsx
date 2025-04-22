@@ -21,9 +21,12 @@ export const Header = () => {
     }),
   };
 
-  const { data } = useGetHeaderVideoQuery(undefined);
+  const { data, error } = useGetHeaderVideoQuery(undefined);
   const videoUrl = data?.data?.[0]?.video?.[0]?.url;
   const fullVideoUrl = videoUrl ? `${BASE_URL}${videoUrl}` : null;
+  
+  console.log('fullVideoUrl', data);
+  console.log('errorerror', error);
 
   return (
     <header className="header">

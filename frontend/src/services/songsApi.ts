@@ -21,7 +21,7 @@ export const songsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getSongs: builder.query<Song[], void>({  
-      query: () => `songs?populate[album][populate]=cover&populate=audio`,
+      query: () => `/api/songs?populate[album][populate]=cover&populate=audio`,
     }),
   }),
 });
