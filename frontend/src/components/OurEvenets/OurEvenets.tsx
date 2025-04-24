@@ -195,7 +195,7 @@ const OurEvenets = () => {
           ) : (
             <div className="selectCity">
               <div className="arrows"></div>
-              <div>Please select city on the map</div>
+              <div className="text">Please select city on the map</div>
             </div>
           ))}
         {activeTab === "passed" &&
@@ -230,7 +230,7 @@ const OurEvenets = () => {
           ) : (
             <div className="selectCity">
               <div className="arrows"></div>
-              <div>Please select city on the map</div>
+              <div className="text">Please select city on the map</div>
             </div>
           ))}
       </div>

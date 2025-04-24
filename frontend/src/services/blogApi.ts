@@ -6,7 +6,7 @@ export const blogApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getBlogs: builder.query({
-      query: () => 'blogs?populate=*',
+      query: () => '/api/blogs?populate=*',
     }),
   }),
 });

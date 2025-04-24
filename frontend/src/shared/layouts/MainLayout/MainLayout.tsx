@@ -9,7 +9,7 @@ import "./MainLayout.scss";
 
 const Start = ({ onFinish }: { onFinish: () => void }) => {
   useEffect(() => {
-    setTimeout(() => onFinish(), 1500);
+    setTimeout(() => onFinish(), 1000);
   }, [onFinish]);
 
   const text = "CATTLE & CANE".split("");
@@ -19,7 +19,7 @@ const Start = ({ onFinish }: { onFinish: () => void }) => {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.08, duration: 0.5 },
+      transition: { delay: i * 0.04, duration: 0.2 },
     }),
   };
 
@@ -28,9 +28,9 @@ const Start = ({ onFinish }: { onFinish: () => void }) => {
       className="absolute inset-0 bg-black flex items-center justify-center z-50 w-full h-full"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
-      transition={{ delay: 1.5, duration: 1 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
     >
-      <h1 className="header-title center-title">
+      <h1 className="header-title center-title text-center max-w-screen-md w-full px-4">
         {text.map((letter, i) => (
           <motion.span
             key={i}

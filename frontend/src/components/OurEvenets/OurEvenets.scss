@@ -47,12 +47,16 @@ $peakopacity: 0.7;
     justify-content: center;
     font-weight: 900;
 
+    .text {
+      font-size: 35px;
+    }
+
     .arrows {
       position: relative;
       /**/
       position: absolute;
       top: 53%;
-      right: 44%;
+      right: 47%;
       /**/
       width: $size;
       height: $size;
