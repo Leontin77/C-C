@@ -1,5 +1,6 @@
 export default ({ env }) => {
   console.log('🧪 APP_KEYS:', env('APP_KEYS'));
+  console.log('RAILWAY ENV VARS:', process.env);
 
   return {
     host: env('HOST', '0.0.0.0'),
