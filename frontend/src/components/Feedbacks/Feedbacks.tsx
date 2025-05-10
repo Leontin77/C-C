@@ -40,7 +40,7 @@ export const Feedbacks = ({ autoplay }: FeedbacksProps) => {
   console.log("dataasdasd", data);
   return (
     <div className="whatPeaopleSay">
-      <h3 className="feedbacksHeader">WHAT PEOPLE SAY</h3>
+      <h3 className="feedbacksHeader"></h3>
       <div className="feedbacks">
         <Slider {...settings} className="feedbacks-slider">
           {data?.data?.map((item: Feedback) => {

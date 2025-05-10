@@ -1,13 +1,13 @@
-import "./OurEvenets.scss";
+import "./PastEvents.scss";
 import ukMap from "../../assets/video/UKmap.png";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import data from "../../api/data.json";
 import { UpcomingEvents } from "../UpcomingEvents/UpcomingEvents";
 
-const OurEvenets = () => {
-  const [activeTab] = useState("upcoming");
-  const [prevTab] = useState("upcoming");
+const PastEvents = () => {
+  const [activeTab, ] = useState("passed");
+  const [prevTab, ] = useState("passed");
   const [zoomed, setZoomed] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [choosenCity, setChoosenCity] = useState("");
@@ -63,11 +63,10 @@ const OurEvenets = () => {
 
   return (
     <div className="upcomingEvents">
-      <h3 className="upcomingEvents-title">UPCOMING EVENTS</h3>
       <div className="tab-content">
         {["passed", "upcoming"].map((tab) => {
           const isActive = activeTab === tab;
-          const isFirstRender = activeTab === prevTab && tab === "upcoming";
+          const isFirstRender = activeTab === prevTab && tab === "passed";
 
           const slideClass =
             activeTab === "passed" && prevTab === "upcoming"
@@ -134,29 +133,6 @@ const OurEvenets = () => {
                         </div>
                       </>
                     )}
-
-                    {activeTab === "upcoming" && (
-                      <>
-                        <div
-                          className="marker marker-stoc upcomingMark"
-                          onClick={() => handleMarkerClick("Stockton-on-tees")}
-                        >
-                          <span className="city-label">Stockton-on-tees</span>
-                        </div>
-                        <div
-                          className="marker marker-lond upcomingMark"
-                          onClick={() => handleMarkerClick("London")}
-                        >
-                          <span className="city-label">London</span>
-                        </div>
-                        <div
-                          className="marker marker-newC upcomingMark"
-                          onClick={() => handleMarkerClick("Newcastle")}
-                        >
-                          <span className="city-label">Newcastle</span>
-                        </div>
-                      </>
-                    )}
                   </div>
                 </div>
               </>
@@ -215,4 +191,4 @@ const OurEvenets = () => {
   );
 };
 
-export default OurEvenets;
+export default PastEvents

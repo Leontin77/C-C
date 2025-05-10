@@ -6,8 +6,10 @@ import {
   FaFacebook,
   FaInstagram,
   FaYoutube,
-  FaGooglePlusG,
+  FaSpotify,
+  FaTiktok
 } from "react-icons/fa";
+import { SiApplemusic } from "react-icons/si";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiPhone } from "react-icons/ci";
@@ -27,7 +29,6 @@ export const Footer = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
 
   return (
     <footer className="footer">
@@ -57,7 +58,7 @@ export const Footer = () => {
                 className="container-list__item"
                 onClick={() => scrollToSection("latest-releases")}
               >
-                Music Albums
+                Music
               </li>
             </Link>
             <Link to={ROUTES.HOME} state={{ scrollTo: "merchandise" }}>
@@ -65,7 +66,7 @@ export const Footer = () => {
                 className="container-list__item"
                 onClick={() => scrollToSection("merchandise")}
               >
-                Our Merchandise
+                Store
               </li>
             </Link>
           </ul>
@@ -103,7 +104,7 @@ export const Footer = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Link to={generateSubscribeUrl()} style={{width: '100%'}}>
+            <Link to={generateSubscribeUrl()} style={{ width: "100%" }}>
               <Button className="button">Subscribe</Button>
             </Link>
           </div>
@@ -130,7 +131,9 @@ export const Footer = () => {
       <div className="social">
         <ul className="social-list">
           <li>
-            <FaFacebook className="social-list-item" size="2em" />
+            <a href="https://www.facebook.com/share/16MLJp3Y13/">
+              <FaFacebook className="social-list-item" size="2em" />
+            </a>
           </li>
           <li>
             <FaInstagram className="social-list-item" size="2em" />
@@ -139,7 +142,13 @@ export const Footer = () => {
             <FaYoutube className="social-list-item" size="2em" />
           </li>
           <li>
-            <FaGooglePlusG className="social-list-item" size="2em" />
+            <FaSpotify className="social-list-item" size="2em" />
+          </li>
+          <li>
+            <SiApplemusic className="social-list-item" size="2em" />
+          </li>
+          <li>
+            <FaTiktok className="social-list-item" size="2em" />
           </li>
         </ul>
       </div>

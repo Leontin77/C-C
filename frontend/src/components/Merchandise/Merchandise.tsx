@@ -32,7 +32,7 @@ const merchData = [
 const Merchandise = () => {
   return (
     <section className="merchandise">
-      <h3 className="merchandise-title">OUR MERCHANDISE</h3>
+      <h3 className="merchandise-title">STORE</h3>
       <div className="merchandise-content">
         {merchData?.map((item) => {
           return (

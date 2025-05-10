@@ -100,12 +100,12 @@ export const NavigationMenu = () => {
             Home
           </li>
         </Link>
-        <Link to={ROUTES.HOME} state={{ scrollTo: "events" }}>
+        <Link to={ROUTES.PASSED_EVENTS}>
           <li
             className="navigationMenu-list__item"
             onClick={() => scrollToSection("events")}
           >
-            Events
+            Past Events
           </li>
         </Link>
         <Link to={ROUTES.HOME} state={{ scrollTo: "latest-releases" }}>
@@ -113,7 +113,7 @@ export const NavigationMenu = () => {
             className="navigationMenu-list__item"
             onClick={() => scrollToSection("latest-releases")}
           >
-            Music Albums
+            Music
           </li>
         </Link>
         <Link to={ROUTES.HOME} state={{ scrollTo: "merchandise" }}>
@@ -121,7 +121,7 @@ export const NavigationMenu = () => {
             className="navigationMenu-list__item"
             onClick={() => scrollToSection("merchandise")}
           >
-            Merchandise
+            Store
           </li>
         </Link>
         <Link to={ROUTES.HOME} state={{ scrollTo: "feedbacks" }}>
@@ -129,7 +129,7 @@ export const NavigationMenu = () => {
             className="navigationMenu-list__item"
             onClick={() => scrollToSection("feedbacks")}
           >
-            Feedbacks
+            Quotes
           </li>
         </Link>
         <Link to={ROUTES.ABOUT_US}>
@@ -140,14 +140,18 @@ export const NavigationMenu = () => {
             About Us
           </li>
         </Link>
-        <Link to={ROUTES.BLOG}>
-          <li
-            className="navigationMenu-list__item"
-            onClick={() => scrollToSection("blog")}
+        <li
+          className="navigationMenu-list__item"
+          onClick={() => scrollToSection("blog")}
+        >
+          <a
+            href="https://cattleandcane.substack.com/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Blog
-          </li>
-        </Link>
+            Substack
+          </a>
+        </li>
         <li className="navigationMenu-list__item" onClick={handleOpenModal}>
           Contact Us
         </li>

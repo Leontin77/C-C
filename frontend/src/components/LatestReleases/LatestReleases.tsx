@@ -52,7 +52,7 @@ const LatestReleases = () => {
 
   return (
     <section className="latestReleases">
-      <h3 className="latestReleases-title">MUSIC ALBUMS</h3>
+      <h3 className="latestReleases-title">MUSIC</h3>
       <div className="latestReleases-content">
         {/* @ts-expect-error asdasdasdasdasd */}
         <Slider data={albums} activeSlide={0} />

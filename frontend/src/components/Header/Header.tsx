@@ -2,7 +2,6 @@ import { useGetHeaderVideoQuery } from "../../services/headerApi";  // Імпо�
 import { motion } from "framer-motion";
 import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
 import { NavigationMenu } from "../NavigationMenu/NavigationMenu";
-import { Button } from "../UI/Button/Button";
 
 import song from "../../assets/songs/dovi.mp3";
 
@@ -21,18 +20,16 @@ export const Header = () => {
     }),
   };
 
-  const { data, error } = useGetHeaderVideoQuery(undefined);
+  const { data } = useGetHeaderVideoQuery(undefined);
   const videoUrl = data?.data?.[0]?.video?.[0]?.url;
   const fullVideoUrl = videoUrl ? `${BASE_URL}${videoUrl}` : null;
   
-  console.log('fullVideoUrl', data);
-  console.log('errorerror', error);
 
   return (
     <header className="header">
       <div className="header-auth">
-        <Button className="header-auth__login">Log in</Button>
-        <Button className="header-auth__login">Sign Up</Button>
+        {/* <Button className="header-auth__login">Log in</Button>
+        <Button className="header-auth__login">Sign Up</Button> */}
       </div>
 
       {fullVideoUrl ? (
