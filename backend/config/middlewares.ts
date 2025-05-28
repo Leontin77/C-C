@@ -4,9 +4,14 @@ export default [
   'strapi::cors',
   {
     name: 'strapi::cors',
+    // config: {
+    //   origin: ['*'],
+    //   headers: '*',
+    // },
     config: {
-      origin: ['*'],
-      headers: '*',
+      origin: ['http://localhost:5173'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      headers: ['Content-Type', 'Authorization'],
     },
   },
   'strapi::poweredBy',

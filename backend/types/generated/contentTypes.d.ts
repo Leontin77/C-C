@@ -488,6 +488,10 @@ export interface ApiHeaderVideoHeaderVideo extends Struct.CollectionTypeSchema {
       'api::header-video.header-video'
     > &
       Schema.Attribute.Private;
+    mainSong: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -496,6 +500,104 @@ export interface ApiHeaderVideoHeaderVideo extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+  };
+}
+
+export interface ApiMainSongMainSong extends Struct.CollectionTypeSchema {
+  collectionName: 'main_songs';
+  info: {
+    displayName: 'mainSong';
+    pluralName: 'main-songs';
+    singularName: 'main-song';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::main-song.main-song'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    song: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPastEventPastEvent extends Struct.CollectionTypeSchema {
+  collectionName: 'past_events';
+  info: {
+    displayName: 'pastEvent';
+    pluralName: 'past-events';
+    singularName: 'past-event';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description1: Schema.Attribute.Text;
+    description2: Schema.Attribute.Text;
+    image1: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    image2: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::past-event.past-event'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSocialSocial extends Struct.CollectionTypeSchema {
+  collectionName: 'socials';
+  info: {
+    displayName: 'social';
+    pluralName: 'socials';
+    singularName: 'social';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::social.social'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1080,6 +1182,9 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::feedback.feedback': ApiFeedbackFeedback;
       'api::header-video.header-video': ApiHeaderVideoHeaderVideo;
+      'api::main-song.main-song': ApiMainSongMainSong;
+      'api::past-event.past-event': ApiPastEventPastEvent;
+      'api::social.social': ApiSocialSocial;
       'api::song.song': ApiSongSong;
       'api::ticket.ticket': ApiTicketTicket;
       'plugin::content-releases.release': PluginContentReleasesRelease;

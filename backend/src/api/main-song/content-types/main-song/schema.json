@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "main_songs",
+  "info": {
+    "singularName": "main-song",
+    "pluralName": "main-songs",
+    "displayName": "mainSong"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "song": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

@@ -52,6 +52,7 @@ const AudioPlayerList: React.FC<AudioPlayerListProps> = ({ album }) => {
         src={currentSong}
         controls
         ref={audioRef}
+        controlsList="nodownload"
       />
 
       <div className="audioPlayerList-container">

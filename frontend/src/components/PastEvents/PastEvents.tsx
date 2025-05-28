@@ -2,16 +2,19 @@ import "./PastEvents.scss";
 import ukMap from "../../assets/video/UKmap.png";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import data from "../../api/data.json";
 import { UpcomingEvents } from "../UpcomingEvents/UpcomingEvents";
+import { useGetPastEventsQuery } from "../../services/pastEventApi";
+import { BASE_URL } from "../../shared/const/url";
 
 const PastEvents = () => {
-  const [activeTab, ] = useState("passed");
-  const [prevTab, ] = useState("passed");
+  const [activeTab] = useState("passed");
+  const [prevTab] = useState("passed");
   const [zoomed, setZoomed] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [choosenCity, setChoosenCity] = useState("");
-  const cityDataPast = data?.result?.pastEvents?.cities;
+
+  const { data: cityDataPast } = useGetPastEventsQuery(undefined);
+
 
   useEffect(() => {
     if (activeTab) {
@@ -153,9 +156,9 @@ const PastEvents = () => {
           ))}
         {activeTab === "passed" &&
           showContent &&
-          cityDataPast?.length &&
+          cityDataPast?.data?.length &&
           (choosenCity ? (
-            cityDataPast
+            cityDataPast?.data
               ?.filter((city) => city.name === choosenCity)
               ?.map((city) => {
                 return (
@@ -163,7 +166,10 @@ const PastEvents = () => {
                     <div className="wrapper">
                       <img
                         className="desc-container__img"
-                        src={city.image1}
+                        src={`${BASE_URL}${
+                          city.image1[0]?.formats?.medium?.url ||
+                          city.image1[0]?.url
+                        }`}
                         alt=""
                       />
                       <div>{animatedText(city.description1)}</div>
@@ -173,7 +179,10 @@ const PastEvents = () => {
                       <div>{animatedText(city.description2)}</div>
                       <img
                         className="desc-container__img"
-                        src={city.image2}
+                        src={`${BASE_URL}${
+                          city.image2[0]?.formats?.medium?.url ||
+                          city.image2[0]?.url
+                        }`}
                         alt=""
                       />
                     </div>
@@ -191,4 +200,4 @@ const PastEvents = () => {
   );
 };
 
-export default PastEvents
+export default PastEvents;

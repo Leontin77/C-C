@@ -1,9 +1,9 @@
-import { useGetHeaderVideoQuery } from "../../services/headerApi";  // Імпортуємо хук RTK Query
+import { useGetHeaderVideoQuery } from "../../services/headerApi";
+import { useGetMainSongsQuery } from "../../services/mainSongApi";
 import { motion } from "framer-motion";
 import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
 import { NavigationMenu } from "../NavigationMenu/NavigationMenu";
 
-import song from "../../assets/songs/dovi.mp3";
 
 import "./Header.scss";
 import { BASE_URL } from "../../shared/const/url";
@@ -20,10 +20,14 @@ export const Header = () => {
     }),
   };
 
-  const { data } = useGetHeaderVideoQuery(undefined);
-  const videoUrl = data?.data?.[0]?.video?.[0]?.url;
+  const { data: headerData } = useGetHeaderVideoQuery(undefined);
+  const { data: mainSongsData } = useGetMainSongsQuery(undefined);
+
+  const videoUrl = headerData?.data?.[0]?.video?.[0]?.url;
+  const songUrl = mainSongsData?.data?.[0]?.song?.[0]?.url;
   const fullVideoUrl = videoUrl ? `${BASE_URL}${videoUrl}` : null;
-  
+  const fullSongUrl = songUrl ? `${BASE_URL}${songUrl}` : undefined;
+
 
   return (
     <header className="header">
@@ -55,7 +59,7 @@ export const Header = () => {
       </h1>
 
       <NavigationMenu />
-      <MusicPlayer className="header-player" src={song} />
+      <MusicPlayer className="header-player" src={fullSongUrl} />
     </header>
   );
 };

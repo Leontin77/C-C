@@ -5,10 +5,10 @@
         {
           "id": 1,
           "name": "Middlesbrough",
-          "image1": "frontend/assets/Middlesbrough/Middlesbrough1.jpg",
+          "image1": "/assets/Middlesbrough/Middlesbrough1.jpg",
           "image2": "/assets/Middlesbrough/Middlesbrough2.jpg",
-          "description1": "Middlesbrough Middlesbrough Middlesbrough Middlesbrough.",
-          "description2": "Middlesbrough Middlesbrough Middlesbrough Middlesbrough."
+          "description1": "Middlesbrough.",
+          "description2": "Middlesbrough."
         },
         {
           "id": 2,
@@ -23,16 +23,16 @@
           "name": "London",
           "image1": "/assets/London/London1.jpg",
           "image2": "/assets/London/London2.jpg",
-          "description1": "The city that never sleeps London.",
-          "description2": "The city that never sleeps London."
+          "description1": "London.",
+          "description2": "London."
         },
         {
           "id": 4,
           "name": "Newcastle",
           "image1": "/assets/Newcastle/Newcastle1.jpg",
           "image2": "/assets/Newcastle/Newcastle2.jpg",
-          "description1": "The city that never sleeps Newcastle.",
-          "description2": "The city that never sleeps Newcastle."
+          "description1": "Newcastle.",
+          "description2": "Newcastle."
         },
         {
           "id": 5,

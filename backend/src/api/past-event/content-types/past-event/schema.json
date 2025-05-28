@@ -1,28 +1,19 @@
 {
   "kind": "collectionType",
-  "collectionName": "header_videos",
+  "collectionName": "past_events",
   "info": {
-    "singularName": "header-video",
-    "pluralName": "header-videos",
-    "displayName": "HeaderVideo",
-    "description": ""
+    "singularName": "past-event",
+    "pluralName": "past-events",
+    "displayName": "pastEvent"
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "video": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "name": {
+      "type": "string"
     },
-    "mainSong": {
+    "image1": {
       "allowedTypes": [
         "images",
         "files",
@@ -31,6 +22,22 @@
       ],
       "type": "media",
       "multiple": true
+    },
+    "image2": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "description1": {
+      "type": "text"
+    },
+    "description2": {
+      "type": "text"
     }
   }
 }

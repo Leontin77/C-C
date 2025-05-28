@@ -26,5 +26,4 @@ export const songsApi = createApi({
   }),
 });
 
-// Генеруємо хук
 export const { useGetSongsQuery } = songsApi;
