@@ -16,6 +16,7 @@
     "@react-three/fiber": "^9.1.0",
     "@reduxjs/toolkit": "^2.6.1",
     "classnames": "^2.5.1",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^12.6.2",
     "react": "^19.0.0",
     "react-audio-player": "^0.17.0",
@@ -29,11 +30,11 @@
     "react-slick": "^0.30.3",
     "react-soundplayer": "^1.0.5",
     "slick-carousel": "^1.8.1",
-    "three": "^0.174.0",
-    "emailjs-com": "^3.2.0"
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@types/node": "^22.15.24",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/react-slick": "^0.23.13",
