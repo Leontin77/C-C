@@ -1,17 +1,16 @@
 export default [
   'strapi::errors',
   'strapi::security',
-  'strapi::cors',
   {
     name: 'strapi::cors',
-    // config: {
-    //   origin: ['*'],
-    //   headers: '*',
-    // },
     config: {
-      origin: ['http://localhost:5173'],
+      origin: [
+        'http://localhost:5173',
+        'https://cattle-and-cane.co.uk', 
+      ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       headers: ['Content-Type', 'Authorization'],
+      credentials: true,
     },
   },
   'strapi::poweredBy',
