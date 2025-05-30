@@ -10,8 +10,15 @@ import { ROUTES } from "./shared/const/router";
 import { PassedEventsPage } from "./pages/PassedEventsPage";
 
 import "./App.css";
+import { useLayoutEffect } from "react";
 
 const App: React.FC = () => {
+  useLayoutEffect(() => {
+    if (window.location.hostname === "www.cattleandcane.co.uk") {
+      window.location.replace("https://cattleandcane.co.uk");
+    }
+  }, []);
+  
   return (
     <Routes>
       <Route path={ROUTES.HOME} element={<MainLayout />}>

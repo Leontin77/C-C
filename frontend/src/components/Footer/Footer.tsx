@@ -131,7 +131,7 @@ export const Footer = () => {
               </li>
               <li>
                 <CiPhone size="1.5em" />
-                <span>+4411231231231</span>
+                <span>+447449323212</span>
               </li>
               <li>
                 <IoLocationOutline size="1.5em" />
