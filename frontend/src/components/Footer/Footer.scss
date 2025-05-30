@@ -11,16 +11,28 @@
     font-size: 30px;
     font-weight: 900;
     margin-top: 10px;
+    @media screen and (max-width: 768px) {
+      font-size: 24px;
+    }
   }
 
   &-wrapper {
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+    }
 
     .container {
       display: flex;
       flex-direction: column;
       width: 250px;
+      @media screen and (max-width: 768px) {
+        align-items: center;
+        font-size: 18px;
+      }
+
 
       &-title {
         font-size: 25px;

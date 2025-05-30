@@ -11,12 +11,24 @@
   overflow: hidden;
   transition: background-image 1s ease-in-out;
 
+  @media screen and (max-width: 768px) {
+    height: 70vh;
+    padding-top: 50px;
+  }
+
   &-auth {
     display: flex;
     gap: 20px;
     position: absolute;
     right: 20px;
     top: 20px;
+  }
+
+  &-burger {
+    position: absolute;
+    z-index: 300;
+    top: 10px;
+    right: 10px;
   }
 }
 
@@ -38,6 +50,10 @@ video {
   letter-spacing: 3px;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 768px) {
+    font-size: 1.4em !important;
+    margin-top: -14px;
+  }
 }
 
 .header-player {
