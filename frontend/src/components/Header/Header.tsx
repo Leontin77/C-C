@@ -9,7 +9,7 @@ import { IoMdClose } from "react-icons/io";
 import "./Header.scss";
 import { BASE_URL } from "../../shared/const/url";
 import { BurgerMenu } from "../BurgerMenu/BurgerMenu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Header = () => {
   const text = "CATTLE & CANE".split("");
@@ -31,6 +31,14 @@ export const Header = () => {
   const fullVideoUrl = videoUrl ? `${BASE_URL}${videoUrl}` : null;
   const fullSongUrl = songUrl ? `${BASE_URL}${songUrl}` : undefined;
   const [openMenu, setOpenMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    onResize();
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
     <header className="header">
@@ -59,9 +67,7 @@ export const Header = () => {
           </motion.span>
         ))}
       </h1>
-
-      {/* <NavigationMenu /> */}
-      <BurgerMenu isOpen={openMenu} />
+      {isMobile ? <BurgerMenu isOpen={openMenu} /> : <NavigationMenu />}
       <MusicPlayer className="header-player" src={fullSongUrl} />
     </header>
   );
