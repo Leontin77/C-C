@@ -47,7 +47,14 @@ export const Header = () => {
       </div>
 
       {fullVideoUrl ? (
-        <video autoPlay loop muted playsInline className="video-bg">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="video-bg"
+        >
           <source src={fullVideoUrl} />
         </video>
       ) : (
