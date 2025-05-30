@@ -6,7 +6,7 @@ export default [
     config: {
       origin: [
         'http://localhost:5173',
-        'https://cattle-and-cane.co.uk', 
+        'https://www.cattle-and-cane.co.uk', 
       ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       headers: ['Content-Type', 'Authorization'],
