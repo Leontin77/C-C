@@ -14,11 +14,11 @@ import { useLayoutEffect } from "react";
 
 const App: React.FC = () => {
   useLayoutEffect(() => {
-    if (window.location.hostname === "www.cattleandcane.co.uk") {
-      window.location.replace("https://cattleandcane.co.uk");
+    if (window.location.hostname === "cattleandcane.co.uk") {
+      window.location.replace("https://www.cattleandcane.co.uk");
     }
   }, []);
-  
+
   return (
     <Routes>
       <Route path={ROUTES.HOME} element={<MainLayout />}>
