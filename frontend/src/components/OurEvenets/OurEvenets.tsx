@@ -12,6 +12,14 @@ const OurEvenets = () => {
   const [showContent, setShowContent] = useState(false);
   const [choosenCity, setChoosenCity] = useState("");
   const cityDataPast = data?.result?.pastEvents?.cities;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    onResize();
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
     if (activeTab) {
@@ -170,7 +178,7 @@ const OurEvenets = () => {
               <UpcomingEvents choosenCity={choosenCity} />
             </div>
           ) : (
-            <div className="selectCity">
+            !isMobile && <div className="selectCity">
               <div className="arrows"></div>
               <div className="text">Please select city on the map</div>
             </div>

@@ -6,22 +6,33 @@
   padding: 10px 20px;
   font-size: 20px;
   gap: 15px;
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 
   &-date {
     font-size: 19px;
     font-weight: 900;
+    font-size: 17px;
   }
 
   &-location {
     margin-left: 40px;
     font-size: 25px;
     font-weight: 900;
+    @media screen and (max-width: 768px) {
+      margin-left: auto;
+      font-size: 21px;
+    }
   }
 
   &-button {
     margin-left: auto;
     background: #ff2d22;
     border-radius: 10px;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
 
     &:hover {
       background: transparent;
@@ -45,6 +56,9 @@
         .text {
             font-size: 20px;
             font-weight: 900;
+            @media screen and (max-width: 768px) {
+              font-size: 17px;
+            }
         }
     }
 

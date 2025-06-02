@@ -33,8 +33,6 @@ export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  console.log("fullVideoUrl", fullVideoUrl);
-
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", onResize);
@@ -45,7 +43,7 @@ export const Header = () => {
   return (
     <header className="header">
       <div className="header-burger" onClick={() => setOpenMenu(!openMenu)}>
-        {openMenu ? <IoMdClose /> : <GiHamburgerMenu />}
+        {openMenu ? <IoMdClose size="2em"/> : <GiHamburgerMenu size="2em"/>}
       </div>
 
       {fullVideoUrl ? (
@@ -84,7 +82,7 @@ export const Header = () => {
           </motion.span>
         ))}
       </h1>
-      {isMobile ? <BurgerMenu isOpen={openMenu} /> : <NavigationMenu />}
+      {isMobile ? <BurgerMenu isOpen={openMenu} setOpenMenu={setOpenMenu} /> : <NavigationMenu />}
       <MusicPlayer className="header-player" src={fullSongUrl} />
     </header>
   );

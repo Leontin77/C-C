@@ -13,9 +13,10 @@ import { RootState } from "../../store/store";
 
 interface BurgerMeuProps {
   isOpen?: boolean
+  setOpenMenu?: any
 }
 
-export const BurgerMenu = ({ isOpen }: BurgerMeuProps) => {
+export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -23,6 +24,7 @@ export const BurgerMenu = ({ isOpen }: BurgerMeuProps) => {
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
+    setOpenMenu(false)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
