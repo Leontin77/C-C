@@ -19,13 +19,21 @@ const customController = {
 
     const fullUrl = `${process.env.BACKEND_PUBLIC_URL || 'https://backend-production-d84f.up.railway.app'}${videoPath}`;
 
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Content-Type', 'video/mp4');
+    ctx.req.headers['host'] = new URL(fullUrl).host;
 
-    ctx.body = new Promise((resolve) => {
-      https.get(fullUrl, (stream) => {
-        resolve(stream);
-      });
+    await new Promise<void>((resolve, reject) => {
+      https.get(fullUrl, {
+        headers: ctx.req.headers, // прокидаємо всі хедери
+      }, (proxyRes) => {
+        ctx.status = proxyRes.statusCode || 200;
+        Object.entries(proxyRes.headers).forEach(([key, value]) => {
+          if (value) ctx.set(key, value as string);
+        });
+
+        ctx.set('Access-Control-Allow-Origin', '*');
+        ctx.body = proxyRes;
+        resolve();
+      }).on('error', reject);
     });
   },
 };
