@@ -33,6 +33,8 @@ export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  console.log("fullVideoUrl", fullVideoUrl);
+
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", onResize);
@@ -54,8 +56,16 @@ export const Header = () => {
           playsInline
           preload="auto"
           className="video-bg"
+          controls={false}
+          disablePictureInPicture
+          ref={(el) => {
+            if (el) {
+              el.setAttribute("playsinline", "true");
+              el.setAttribute("webkit-playsinline", "true");
+            }
+          }}
         >
-          <source src={fullVideoUrl} type="video/mp4"/>
+          <source src={fullVideoUrl} type="video/mp4" />
         </video>
       ) : (
         <p>Sorry, video not found.</p>
