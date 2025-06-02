@@ -55,7 +55,7 @@ export const Header = () => {
           preload="auto"
           className="video-bg"
         >
-          <source src={fullVideoUrl} />
+          <source src={fullVideoUrl} type="video/mp4"/>
         </video>
       ) : (
         <p>Sorry, video not found.</p>

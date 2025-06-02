@@ -4,9 +4,12 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:5173', 'https://www.cattleandcane.co.uk', 'http://10.17.106.52:5173'],
+      origin: ['http://10.17.106.52:5173', 
+      'http://localhost:5173', 
+      'https://www.cattleandcane.co.uk'
+      ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      headers: ['Content-Type', 'Authorization'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       credentials: true,
     },
   },
