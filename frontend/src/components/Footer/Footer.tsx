@@ -216,7 +216,7 @@ export const Footer = () => {
             <ul className="container-list">
               <li style={isMobile ? { fontSize: "14px" } : {}}>
                 <HiOutlineMail size="1.5em" />
-                <span>cattleandcane@gmail.com</span>
+                <span>band@cattleandcane.co.uk</span>
               </li>
               <li style={isMobile ? { fontSize: "14px" } : {}}>
                 <CiPhone size="1.5em" />
