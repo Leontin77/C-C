@@ -9,7 +9,7 @@ export default [
       'https://www.cattleandcane.co.uk'
       ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'Range'],
       credentials: true,
     },
   },
