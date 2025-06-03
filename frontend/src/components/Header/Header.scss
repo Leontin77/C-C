@@ -60,6 +60,9 @@ video {
   background: transparent;
   opacity: 0.4;
   transition: opacity 300ms ease-in;
+  @media screen and (max-width: 768px) {
+    transform: scale(.7);
+  }
 
   &:hover {
     opacity: 1;

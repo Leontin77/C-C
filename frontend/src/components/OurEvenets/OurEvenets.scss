@@ -144,6 +144,9 @@ $peakopacity: 0.7;
         display: block;
         width: 55%;
         font-size: 20px;
+        @media screen and (max-width: 768px) {
+          font-size: 12px;
+        }
       }
     }
   }
@@ -186,7 +189,7 @@ $peakopacity: 0.7;
         display: block;
         @media screen and (max-width: 768px) {
           width: auto !important;
-          height: 500px;
+          height: 420px;
           margin: auto;
         }
       }
