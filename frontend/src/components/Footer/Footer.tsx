@@ -15,7 +15,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { CiPhone } from "react-icons/ci";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { useGetSocailsQuery } from "../../services/socailApi";
 
 export const Footer = () => {
@@ -31,6 +31,15 @@ export const Footer = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  
+    useEffect(() => {
+      const onResize = () => setIsMobile(window.innerWidth <= 768);
+      window.addEventListener("resize", onResize);
+      onResize();
+      return () => window.removeEventListener("resize", onResize);
+    }, []);
 
   const ICON_MAP: Record<string, JSX.Element> = {
     facebook: <FaFacebook className="social-list-item" size="2em" />,
@@ -106,7 +115,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          <div className="container" style={{width: '100%'}}>
+          <div className="container" style={isMobile ? {width: '100%'} : {}}>
             <h5 className="container-title">Subscribe</h5>
             <div className="container-input">
               <Input
@@ -116,24 +125,24 @@ export const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <Link to={generateSubscribeUrl()} style={{ width: "100%" }}>
+              <Link to={generateSubscribeUrl()} style={isMobile ? { width: "100%" } : {}}>
                 <Button className="button">Subscribe</Button>
               </Link>
             </div>
           </div>
 
-          <div className="container" style={{width: '100%'}}>
+          <div className="container" style={isMobile ? {width: '100%'} : {}}>
             <h5 className="container-title">Contacts</h5>
             <ul className="container-list">
-              <li style={{fontSize: '14px'}}>
+              <li style={isMobile ? {fontSize: '14px'} : {}}>
                 <HiOutlineMail size="1.5em" />
                 <span>cattleandcane@gmail.com</span>
               </li>
-              <li style={{fontSize: '14px'}}>
+              <li style={isMobile ? {fontSize: '14px'} : {}}>
                 <CiPhone size="1.5em" />
                 <span>+447449323212</span>
               </li>
-              <li style={{fontSize: '14px'}}>
+              <li style={isMobile ? {fontSize: '14px'} : {}}>
                 <IoLocationOutline size="1.5em" />
                 <span>England, London</span>
               </li>

@@ -42,7 +42,7 @@ export const Header = () => {
   return (
     <header className="header">
       <div className="header-burger" onClick={() => setOpenMenu(!openMenu)}>
-        <GiHamburgerMenu size="1.7em"/>
+        {isMobile && <GiHamburgerMenu size="1.7em"/>}
       </div>
 
       {fullVideoUrl ? (

@@ -14,7 +14,6 @@ const PastEvents = () => {
   const [choosenCity, setChoosenCity] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  console.log('choosenCity', choosenCity, showContent);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
