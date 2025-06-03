@@ -65,7 +65,7 @@ export const Header = () => {
           <source src={fullVideoUrl} type="video/mp4" />
         </video>
       ) : (
-        <p>Sorry, video not found.</p>
+        <p></p>
       )}
 
       <h1 className="header-title">

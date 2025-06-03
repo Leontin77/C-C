@@ -45,11 +45,13 @@
         flex: 0 0 auto;
       }
 
-      &:hover {
-        transform: scale(1.05);
-        transition: all 0.2s ease-in;
-        border: 2px solid rgba(255, 87, 34, 1);
-        opacity: 1;
+      @media screen and (min-width: 769px) {
+        &:hover {
+          transform: scale(1.05);
+          transition: all 0.2s ease-in;
+          border: 2px solid rgba(255, 87, 34, 1);
+          opacity: 1;
+        }
       }
 
       &-title {
@@ -61,7 +63,7 @@
         letter-spacing: 0.8px;
 
         @media screen and (max-width: 768px) {
-         font-size: 14px;
+          font-size: 14px;
         }
       }
 

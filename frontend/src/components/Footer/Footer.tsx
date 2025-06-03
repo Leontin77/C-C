@@ -106,7 +106,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          <div className="container">
+          <div className="container" style={{width: '100%'}}>
             <h5 className="container-title">Subscribe</h5>
             <div className="container-input">
               <Input
@@ -122,18 +122,18 @@ export const Footer = () => {
             </div>
           </div>
 
-          <div className="container">
+          <div className="container" style={{width: '100%'}}>
             <h5 className="container-title">Contacts</h5>
             <ul className="container-list">
-              <li>
+              <li style={{fontSize: '14px'}}>
                 <HiOutlineMail size="1.5em" />
                 <span>cattleandcane@gmail.com</span>
               </li>
-              <li>
+              <li style={{fontSize: '14px'}}>
                 <CiPhone size="1.5em" />
                 <span>+447449323212</span>
               </li>
-              <li>
+              <li style={{fontSize: '14px'}}>
                 <IoLocationOutline size="1.5em" />
                 <span>England, London</span>
               </li>

@@ -1,6 +1,9 @@
 .footer {
   padding: 50px 90px;
   background: #1a1a1a;
+  @media screen and (max-width: 768px) {
+    padding: 30px;
+  }
 
   &-container {
     max-width: 1400px;
@@ -12,7 +15,7 @@
     font-weight: 900;
     margin-top: 10px;
     @media screen and (max-width: 768px) {
-      font-size: 24px;
+      font-size: 20px;
     }
   }
 
@@ -20,8 +23,8 @@
     display: flex;
     justify-content: space-between;
     @media screen and (max-width: 768px) {
-      flex-direction: column;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .container {
@@ -31,8 +34,9 @@
       @media screen and (max-width: 768px) {
         align-items: center;
         font-size: 18px;
+        width: auto;
+        height: 180px;
       }
-
 
       &-title {
         font-size: 25px;
@@ -41,6 +45,9 @@
         letter-spacing: 1.5px;
         margin-top: 10px;
         color: #ff5722;
+        @media screen and (max-width: 768px) {
+          font-size: 19px;
+        }
       }
 
       &-input {
@@ -80,6 +87,9 @@
           cursor: pointer;
           transition: color 0.3s ease-in-out;
           font-size: 17px;
+          @media screen and (max-width: 768px) {
+            font-size: 14px;
+          }
 
           &:after {
             content: "";
@@ -146,5 +156,8 @@
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+    @media screen and (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 }
