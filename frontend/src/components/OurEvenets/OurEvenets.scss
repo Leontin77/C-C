@@ -230,30 +230,51 @@ $peakopacity: 0.7;
     .marker-mid {
       top: 50%;
       right: 30%;
+      @media screen and (max-width: 768px) {
+        right: 10%;
+      }
     }
     .marker-stoc {
       top: 45%;
       right: 35%;
+       @media screen and (max-width: 768px) {
+        right: 15%;
+      }
     }
     .marker-lond {
       bottom: 19%;
-      right: 27%;
+      right: 77%;
+       @media screen and (max-width: 768px) {
+        right: 10%;
+      }
     }
     .marker-newC {
       top: 55%;
       right: 26%;
+       @media screen and (max-width: 768px) {
+        right: 6%;
+      }
     }
     .marker-manch {
       top: 60%;
       right: 40%;
+      @media screen and (max-width: 768px) {
+        right: 20%;
+      }
     }
     .marker-gains {
       top: 64%;
       right: 31%;
+      @media screen and (max-width: 768px) {
+        right: 11%;
+      }
     }
     .marker-birm {
       bottom: 26%;
       right: 32%;
+      @media screen and (max-width: 768px) {
+        right: 12%;
+      }
     }
   }
 
@@ -297,6 +318,10 @@ $peakopacity: 0.7;
   transform: translate(-50%, -50%);
   transition: transform 1s ease-in-out;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 50px !important;
+    background: transparent !important;
+  }
 
   .city-label {
     position: absolute;
@@ -317,6 +342,9 @@ $peakopacity: 0.7;
     backdrop-filter: blur(3px);
     @media screen and (max-width: 768px) {
       font-size: 8px;
+      top: -5px;
+      left: 0;
+      transform: translate(0%);
     }
   }
 

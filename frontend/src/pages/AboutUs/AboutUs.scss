@@ -1,5 +1,8 @@
 .aboutUs {
   padding: 40px 0;
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+  }
   &-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -8,16 +11,25 @@
   &-title {
     font-size: 35px;
     font-weight: 900;
+    @media screen and (max-width: 768px) {
+      font-size: 23px !important;
+    }
   }
 
   &-mainTitle {
     font-size: 60px;
     text-align: center;
+    @media screen and (max-width: 768px) {
+      font-size: 25px !important;
+    }
   }
 
   &-content {
     p {
       font-size: 23px;
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+      }
     }
 
     &__img {
@@ -39,33 +51,39 @@
   margin: 0 auto;
   align-items: center;
 
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
   .aboutUs-title {
     grid-column: span 2;
     font-size: 32px;
     margin-bottom: 20px;
     text-align: center;
     color: #ff5722;
+
+    @media screen and (max-width: 768px) {
+      grid-column: span 1;
+      font-size: 24px;
+    }
   }
 
   .aboutUs-content {
-    display: contents; // використовуємо "contents", щоб впорядкувати в grid
+    display: contents;
+
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
   }
 
-  .aboutUs-content:nth-of-type(even) img {
-    grid-column: 2;
-    grid-row: span 1;
-  }
-
-  .aboutUs-content:nth-of-type(even) p {
-    grid-column: 1;
-  }
-
-  .aboutUs-content:nth-of-type(odd) img {
-    grid-column: 1;
-  }
-
-  .aboutUs-content:nth-of-type(odd) p {
-    grid-column: 2;
+  .aboutUs-content:nth-of-type(even),
+  .aboutUs-content:nth-of-type(odd) {
+    @media screen and (max-width: 768px) {
+      img, p {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
   }
 
   img {
@@ -75,6 +93,10 @@
     border-radius: 8px;
     height: 450px;
     object-fit: cover;
+
+    @media screen and (max-width: 768px) {
+      height: auto;
+    }
   }
 
   p {
@@ -89,5 +111,11 @@
     border-radius: 10px;
     color: #efeaea;
     font-weight: 900;
+
+    @media screen and (max-width: 768px) {
+      font-size: 16px;
+      height: auto;
+      margin-top: 10px;
+    }
   }
 }

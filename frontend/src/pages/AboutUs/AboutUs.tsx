@@ -19,7 +19,7 @@ export const AboutUs = () => {
   return (
     <section className="aboutUs">
       <div className="aboutUs-container">
-        <h1 className="aboutUs-mainTitle">Hello! Welcome to our Substack.</h1>
+        <h1 className="aboutUs-mainTitle">Hello! <br/>Welcome to our website.</h1>
         <div className="aboutUs-content">
           <p>
             We are Helen and Joe, two siblings, bandmates and songwriters from
