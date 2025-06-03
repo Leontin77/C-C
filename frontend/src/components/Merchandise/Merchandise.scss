@@ -2,7 +2,7 @@
   position: relative;
   padding: 30px 70px 70px 30px;
 
-  @media screen and (max-width: "768px") {
+  @media screen and (max-width: 768px) {
     padding: 30px;
   }
 
@@ -16,6 +16,15 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 20px;
+
+    @media screen and (max-width: 768px) {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+    }
 
     .wrapper {
       width: 21%;
@@ -29,8 +38,11 @@
       background: rgba(53, 52, 52, 0.9);
       transition: all 0.2s ease-in;
       opacity: 0.8;
+      scroll-snap-align: center;
+
       @media screen and (max-width: 768px) {
-        width: 100%;
+        min-width: 70%;
+        flex: 0 0 auto;
       }
 
       &:hover {
@@ -47,6 +59,10 @@
         top: 10px;
         text-decoration: underline;
         letter-spacing: 0.8px;
+
+        @media screen and (max-width: 768px) {
+         font-size: 14px;
+        }
       }
 
       &-img {
@@ -67,6 +83,11 @@
       height: 80px;
       border: 2px solid #ff5722;
       font-size: 23px;
+      @media screen and (max-width: 768px) {
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+      }
 
       a {
         all: unset;

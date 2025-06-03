@@ -37,7 +37,6 @@ export const Feedbacks = ({ autoplay }: FeedbacksProps) => {
   };
   const { data } = useGetFeedbacksQuery(undefined);
 
-  console.log("dataasdasd", data);
   return (
     <div className="whatPeaopleSay">
       <h3 className="feedbacksHeader"></h3>

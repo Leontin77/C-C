@@ -10,10 +10,11 @@ import { Textarea } from "../UI/Textarea/Textarea";
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import { RootState } from "../../store/store";
+import { IoMdClose } from "react-icons/io";
 
 interface BurgerMeuProps {
-  isOpen?: boolean
-  setOpenMenu?: any
+  isOpen?: boolean;
+  setOpenMenu?: any;
 }
 
 export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
@@ -24,7 +25,7 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    setOpenMenu(false)
+    setOpenMenu(false);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -98,6 +99,9 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
 
   return (
     <nav className={`burgerMenu ${isOpen ? "active" : ""}`}>
+      <div className="header-burger" onClick={() => setOpenMenu(false)}>
+        <IoMdClose size="1.7em" />
+      </div>
       <ul className="burgerMenu-list">
         <Link to={ROUTES.HOME}>
           <li

@@ -12,9 +12,18 @@ const PastEvents = () => {
   const [zoomed, setZoomed] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [choosenCity, setChoosenCity] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  console.log('choosenCity', choosenCity, showContent);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    onResize();
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const { data: cityDataPast } = useGetPastEventsQuery(undefined);
-
 
   useEffect(() => {
     if (activeTab) {
@@ -96,43 +105,43 @@ const PastEvents = () => {
                           className="marker marker-mid"
                           onClick={() => handleMarkerClick("Middlesbrough")}
                         >
-                          <span className="city-label">Middlesbrough</span>
+                          {<span className="city-label">Middlesbrough</span>}
                         </div>
                         <div
                           className="marker marker-stoc"
                           onClick={() => handleMarkerClick("Stockton-on-tees")}
                         >
-                          <span className="city-label">Stockton-on-tees</span>
+                          {<span className="city-label">Stockton-on-tees</span>}
                         </div>
                         <div
                           className="marker marker-lond"
                           onClick={() => handleMarkerClick("London")}
                         >
-                          <span className="city-label">London</span>
+                          {<span className="city-label">London</span>}
                         </div>
                         <div
                           className="marker marker-newC"
                           onClick={() => handleMarkerClick("Newcastle")}
                         >
-                          <span className="city-label">Newcastle</span>
+                          {<span className="city-label">Newcastle</span>}
                         </div>
                         <div
                           className="marker marker-manch"
                           onClick={() => handleMarkerClick("Manchester")}
                         >
-                          <span className="city-label">Manchester</span>
+                          {<span className="city-label">Manchester</span>}
                         </div>
                         <div
                           className="marker marker-gains"
                           onClick={() => handleMarkerClick("Gainsborough")}
                         >
-                          <span className="city-label"> Gainsborough</span>
+                          {<span className="city-label"> Gainsborough</span>}
                         </div>
                         <div
                           className="marker marker-birm"
                           onClick={() => handleMarkerClick("Birmingham")}
                         >
-                          <span className="city-label"> Birmingham</span>
+                          {<span className="city-label"> Birmingham</span>}
                         </div>
                       </>
                     )}
@@ -157,44 +166,44 @@ const PastEvents = () => {
         {activeTab === "passed" &&
           showContent &&
           cityDataPast?.data?.length &&
-          (choosenCity ? (
-            cityDataPast?.data
-              ?.filter((city) => city.name === choosenCity)
-              ?.map((city) => {
-                return (
-                  <div className="desc-container">
-                    <div className="wrapper">
-                      <img
-                        className="desc-container__img"
-                        src={`${BASE_URL}${
-                          city.image1[0]?.formats?.medium?.url ||
-                          city.image1[0]?.url
-                        }`}
-                        alt=""
-                      />
-                      <div>{animatedText(city.description1)}</div>
-                    </div>
+          (choosenCity
+            ? cityDataPast?.data
+                ?.filter((city) => city.name === choosenCity)
+                ?.map((city) => {
+                  return (
+                    <div className="desc-container">
+                      <div className="wrapper">
+                        <img
+                          className="desc-container__img"
+                          src={`${BASE_URL}${
+                            city.image1[0]?.formats?.medium?.url ||
+                            city.image1[0]?.url
+                          }`}
+                          alt=""
+                        />
+                        <div>{animatedText(city.description1)}</div>
+                      </div>
 
-                    <div className="wrapper">
-                      <div>{animatedText(city.description2)}</div>
-                      <img
-                        className="desc-container__img"
-                        src={`${BASE_URL}${
-                          city.image2[0]?.formats?.medium?.url ||
-                          city.image2[0]?.url
-                        }`}
-                        alt=""
-                      />
+                      <div className="wrapper">
+                        <div>{animatedText(city.description2)}</div>
+                        <img
+                          className="desc-container__img"
+                          src={`${BASE_URL}${
+                            city.image2[0]?.formats?.medium?.url ||
+                            city.image2[0]?.url
+                          }`}
+                          alt=""
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })
-          ) : (
-            <div className="selectCity">
-              <div className="arrows"></div>
-              <div className="text">Please select city on the map</div>
-            </div>
-          ))}
+                  );
+                })
+            : !isMobile && (
+                <div className="selectCity">
+                  <div className="arrows"></div>
+                  <div className="text">Please select city on the map</div>
+                </div>
+              ))}
       </div>
     </div>
   );

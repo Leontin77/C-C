@@ -55,7 +55,6 @@ export const Slider: React.FC<SliderProps> = ({
       <div className="slideC">
         {data &&
           data.map((item: any, i: number) => {
-            console.log("itemitem", item);
             return (
               <React.Fragment key={item.albumName}>
                 <div

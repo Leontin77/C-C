@@ -1,6 +1,10 @@
 .latestReleases {
     position: relative;
     padding: 70px;
+
+    @media screen and (max-width: 768px) {
+      padding: 30px 10px;
+    }
   
     &::before {
       content: "";

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
 import { NavigationMenu } from "../NavigationMenu/NavigationMenu";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { IoMdClose } from "react-icons/io";
 
 import "./Header.scss";
 import { BASE_URL } from "../../shared/const/url";
@@ -43,7 +42,7 @@ export const Header = () => {
   return (
     <header className="header">
       <div className="header-burger" onClick={() => setOpenMenu(!openMenu)}>
-        {openMenu ? <IoMdClose size="2em"/> : <GiHamburgerMenu size="2em"/>}
+        <GiHamburgerMenu size="1.7em"/>
       </div>
 
       {fullVideoUrl ? (

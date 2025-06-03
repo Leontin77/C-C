@@ -149,19 +149,36 @@ const OurEvenets = () => {
                           className="marker marker-stoc upcomingMark"
                           onClick={() => handleMarkerClick("Stockton-on-tees")}
                         >
-                          <span className="city-label">Stockton-on-tees</span>
+                          <span
+                            className="city-label"
+                            onClick={() =>
+                              handleMarkerClick("Stockton-on-tees")
+                            }
+                          >
+                            Stockton-on-tees
+                          </span>
                         </div>
                         <div
                           className="marker marker-lond upcomingMark"
                           onClick={() => handleMarkerClick("London")}
                         >
-                          <span className="city-label">London</span>
+                          <span
+                            className="city-label"
+                            onClick={() => handleMarkerClick("London")}
+                          >
+                            London
+                          </span>
                         </div>
                         <div
                           className="marker marker-newC upcomingMark"
                           onClick={() => handleMarkerClick("Newcastle")}
                         >
-                          <span className="city-label">Newcastle</span>
+                          <span
+                            className="city-label"
+                            onClick={() => handleMarkerClick("Newcastle")}
+                          >
+                            Newcastle
+                          </span>
                         </div>
                       </>
                     )}
@@ -178,10 +195,12 @@ const OurEvenets = () => {
               <UpcomingEvents choosenCity={choosenCity} />
             </div>
           ) : (
-            !isMobile && <div className="selectCity">
-              <div className="arrows"></div>
-              <div className="text">Please select city on the map</div>
-            </div>
+            !isMobile && (
+              <div className="selectCity">
+                <div className="arrows"></div>
+                <div className="text">Please select city on the map</div>
+              </div>
+            )
           ))}
         {activeTab === "passed" &&
           showContent &&

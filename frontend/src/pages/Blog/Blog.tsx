@@ -9,7 +9,6 @@ export const Blog = () => {
   const { data } = useGetBlogsQuery(undefined);
   const [openComments, setOpenComments] = useState(false);
 
-  console.log("dataBBB", data);
   return (
     <section className="blog">
       <h1 className="blog-title">Blog</h1>

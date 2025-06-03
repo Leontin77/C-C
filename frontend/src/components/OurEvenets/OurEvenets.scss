@@ -315,6 +315,9 @@ $peakopacity: 0.7;
     transition: opacity 0.3s ease, transform 0.3s ease;
     text-shadow: 0 0 5px #ff5722, 0 0 10px #ff5722;
     backdrop-filter: blur(3px);
+    @media screen and (max-width: 768px) {
+      font-size: 8px;
+    }
   }
 
   &:hover .city-label {

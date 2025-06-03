@@ -80,3 +80,13 @@
 .btns .btn:last-child {
   margin-left: 40px;
 }
+
+@media (max-width: 768px) {
+  .slideC {
+    width: 100%;
+  }
+
+  .slide {
+    width: 100%;
+  }
+}

@@ -5,8 +5,6 @@ import "./UpcomingEvents.scss";
 export const UpcomingEvents = ({choosenCity}) => {
   const { data } = useGetTicketsQuery(undefined);
 
-  console.log('choosenCity', choosenCity);
-
   return (
     <div className="upcomingEvent">
       {data?.data
