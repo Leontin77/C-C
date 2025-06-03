@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { useGetFeedbacksQuery } from "../../services/feedbackApi";
 import { BASE_URL } from "../../shared/const/url";
+import { RiDoubleQuotesL } from "react-icons/ri";
+import { RiDoubleQuotesR } from "react-icons/ri";
 
 import "./Feedbacks.scss";
 
@@ -52,7 +54,11 @@ export const Feedbacks = ({ autoplay }: FeedbacksProps) => {
                   }`}
                 />
                 <div className="feedbacks-carousel__content">
-                  <div className="text">{item.text}</div>
+                  <div className="text">
+                    <RiDoubleQuotesL size="1em" />{" "}
+                    {item.text} {" "}
+                    <RiDoubleQuotesR size="1em" />
+                  </div>
                   <div className="name">
                     <span>{item.name} </span>
                     <span>{item.age} years</span>
