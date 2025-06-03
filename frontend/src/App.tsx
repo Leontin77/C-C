@@ -8,6 +8,8 @@ import { BlogDetails } from "./pages/BlogDetails";
 import { MainLayout } from "./shared/layouts/MainLayout";
 import { ROUTES } from "./shared/const/router";
 import { PassedEventsPage } from "./pages/PassedEventsPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 import { useLayoutEffect } from "react";
@@ -20,15 +22,18 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Routes>
-      <Route path={ROUTES.HOME} element={<MainLayout />}>
-        <Route path={ROUTES.HOME} element={<HomePage />} />
-        <Route path={ROUTES.ABOUT_US} element={<AboutUs />} />
-        <Route path={ROUTES.BLOG} element={<Blog />} />
-        <Route path={ROUTES.BLOG_DETAILS} element={<BlogDetails />} />
-        <Route path={ROUTES.PASSED_EVENTS} element={<PassedEventsPage />} />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<MainLayout />}>
+          <Route path={ROUTES.HOME} element={<HomePage />} />
+          <Route path={ROUTES.ABOUT_US} element={<AboutUs />} />
+          <Route path={ROUTES.BLOG} element={<Blog />} />
+          <Route path={ROUTES.BLOG_DETAILS} element={<BlogDetails />} />
+          <Route path={ROUTES.PASSED_EVENTS} element={<PassedEventsPage />} />
+        </Route>
+      </Routes>
+      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+    </>
   );
 };
 

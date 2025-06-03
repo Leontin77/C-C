@@ -11,6 +11,7 @@ import { useState } from "react";
 import emailjs from "emailjs-com";
 import { RootState } from "../../store/store";
 import { IoMdClose } from "react-icons/io";
+import { toast } from 'react-toastify';
 
 interface BurgerMeuProps {
   isOpen?: boolean;
@@ -83,6 +84,7 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
         })
         .then((response) => {
           console.log("Email sent successfully", response);
+          toast.success('Email sent successfully');
         })
         .catch((error) => {
           console.error("Error sending email", error);

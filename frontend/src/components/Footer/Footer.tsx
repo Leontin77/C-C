@@ -17,6 +17,14 @@ import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
 import { JSX, useEffect, useState } from "react";
 import { useGetSocailsQuery } from "../../services/socailApi";
+import Modal from "../UI/Modal/Modal";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { openModal, closeModal } from "../../store/modal/modal.slice";
+import emailjs from "emailjs-com";
+import { Textarea } from "../UI/Textarea/Textarea";
+import { toast } from 'react-toastify';
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -32,14 +40,83 @@ export const Footer = () => {
     }
   };
 
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  
-    useEffect(() => {
-      const onResize = () => setIsMobile(window.innerWidth <= 768);
-      window.addEventListener("resize", onResize);
-      onResize();
-      return () => window.removeEventListener("resize", onResize);
-    }, []);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+  const dispatch = useDispatch();
+
+  const handleOpenModal = () => {
+    dispatch(openModal());
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+  };
+
+  const validateForm = () => {
+    let valid = true;
+    const errors = { name: "", email: "", message: "" };
+
+    if (!name) {
+      errors.name = "Name is required.";
+      valid = false;
+    }
+    if (!email) {
+      errors.email = "Email is required.";
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "Email is invalid.";
+      valid = false;
+    }
+    if (!message) {
+      errors.message = "Message is required.";
+      valid = false;
+    }
+
+    setErrors(errors);
+    return valid;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    const formData = { name, email, message };
+
+    try {
+      emailjs.init("OyEJgHok_8Ahju8_J");
+      emailjs
+        .send("service_wgm6mcn", "template_rn2y9ge", {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        })
+        .then((response) => {
+          console.log("Email sent successfully", response);
+          toast.success('Email sent successfully');
+        })
+        .catch((error) => {
+          console.error("Error sending email", error);
+        });
+      handleCloseModal();
+
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      console.error("Failed to send email", error);
+    }
+  };
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    onResize();
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const ICON_MAP: Record<string, JSX.Element> = {
     facebook: <FaFacebook className="social-list-item" size="2em" />,
@@ -107,7 +184,7 @@ export const Footer = () => {
               <Link to="">
                 <li
                   className="container-list__item"
-                  onClick={() => scrollToSection("contact")}
+                  onClick={() => handleOpenModal()}
                 >
                   Contact Us
                 </li>
@@ -115,7 +192,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          <div className="container" style={isMobile ? {width: '100%'} : {}}>
+          <div className="container" style={isMobile ? { width: "100%" } : {}}>
             <h5 className="container-title">Subscribe</h5>
             <div className="container-input">
               <Input
@@ -125,24 +202,27 @@ export const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <Link to={generateSubscribeUrl()} style={isMobile ? { width: "100%" } : {}}>
+              <Link
+                to={generateSubscribeUrl()}
+                style={isMobile ? { width: "100%" } : {}}
+              >
                 <Button className="button">Subscribe</Button>
               </Link>
             </div>
           </div>
 
-          <div className="container" style={isMobile ? {width: '100%'} : {}}>
+          <div className="container" style={isMobile ? { width: "100%" } : {}}>
             <h5 className="container-title">Contacts</h5>
             <ul className="container-list">
-              <li style={isMobile ? {fontSize: '14px'} : {}}>
+              <li style={isMobile ? { fontSize: "14px" } : {}}>
                 <HiOutlineMail size="1.5em" />
                 <span>cattleandcane@gmail.com</span>
               </li>
-              <li style={isMobile ? {fontSize: '14px'} : {}}>
+              <li style={isMobile ? { fontSize: "14px" } : {}}>
                 <CiPhone size="1.5em" />
                 <span>+447449323212</span>
               </li>
-              <li style={isMobile ? {fontSize: '14px'} : {}}>
+              <li style={isMobile ? { fontSize: "14px" } : {}}>
                 <IoLocationOutline size="1.5em" />
                 <span>England, London</span>
               </li>
@@ -171,6 +251,39 @@ export const Footer = () => {
       <div className="allRights">
         Copyright © 2025 Cattle & Cane - All Rights Reserved.
       </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <h2>Contact Us</h2>
+        <form className="modal-input-form" onSubmit={handleSubmit}>
+          <Input
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          {errors.name && <p className="error">{errors.name}</p>}
+
+          <Input
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            type="email"
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+
+          <Textarea
+            label="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+          />
+          {errors.message && <p className="error">{errors.message}</p>}
+
+          <Button className="button" type="submit">
+            Send
+          </Button>
+        </form>
+      </Modal>
     </footer>
   );
 };
