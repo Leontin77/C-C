@@ -29,6 +29,7 @@ export const Header = () => {
   const songUrl = mainSongsData?.data?.[0]?.song?.[0]?.url;
   const fullVideoUrl = videoUrl ? `${BASE_URL}${videoUrl}` : null;
   const fullSongUrl = songUrl ? `${BASE_URL}${songUrl}` : undefined;
+
   const [openMenu, setOpenMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
