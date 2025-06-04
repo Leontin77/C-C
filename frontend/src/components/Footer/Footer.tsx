@@ -24,7 +24,7 @@ import { useDispatch } from "react-redux";
 import { openModal, closeModal } from "../../store/modal/modal.slice";
 import emailjs from "emailjs-com";
 import { Textarea } from "../UI/Textarea/Textarea";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -96,7 +96,7 @@ export const Footer = () => {
         })
         .then((response) => {
           console.log("Email sent successfully", response);
-          toast.success('Email sent successfully');
+          toast.success("Email sent successfully");
         })
         .catch((error) => {
           console.error("Error sending email", error);
@@ -138,7 +138,9 @@ export const Footer = () => {
               <Link to={ROUTES.HOME}>
                 <li
                   className="container-list__item"
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   Home
                 </li>
@@ -171,12 +173,24 @@ export const Footer = () => {
           </div>
 
           <div className="container">
-            <h5 className="container-title">About Us</h5>
+            <h5 className="container-title">Navigation</h5>
             <ul className="container-list">
+              <Link to={ROUTES.PASSED_EVENTS}>
+                <li
+                  className="container-list__item"
+                  onClick={() =>
+                    window.scrollTo({ top: 500, behavior: "smooth" })
+                  }
+                >
+                  Highlights
+                </li>
+              </Link>
               <Link to={ROUTES.ABOUT_US}>
                 <li
                   className="container-list__item"
-                  onClick={() => scrollToSection("about")}
+                  onClick={() =>
+                    window.scrollTo({ top: 500, behavior: "smooth" })
+                  }
                 >
                   About Us
                 </li>
