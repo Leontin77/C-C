@@ -36,6 +36,7 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
 
   const handleOpenModal = () => {
+    setOpenMenu(false)
     dispatch(openModal());
   };
 
@@ -118,10 +119,10 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
             className="burgerMenu-list__item"
             onClick={() => scrollToSection("events")}
           >
-            Past Events
+            Highlights 
           </li>
         </Link>
-        <Link to={ROUTES.HOME} state={{ scrollTo: "latest-releases" }}>
+        {/* <Link to={ROUTES.HOME} state={{ scrollTo: "latest-releases" }}>
           <li
             className="burgerMenu-list__item"
             onClick={() => scrollToSection("latest-releases")}
@@ -144,7 +145,7 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
           >
             Quotes
           </li>
-        </Link>
+        </Link> */}
         <Link to={ROUTES.ABOUT_US}>
           <li
             className="burgerMenu-list__item"

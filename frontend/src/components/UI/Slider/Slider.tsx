@@ -7,6 +7,7 @@ import {
 
 import "./Slider.scss";
 import { SliderContent } from "../SliderContent/SliderContent";
+import { useRef } from "react";
 
 interface SlideItem {
   albumName: string;
@@ -18,13 +19,23 @@ interface SlideItem {
 interface SliderProps {
   data: SlideItem[];
   activeSlide: number;
+  onAllIframesLoaded: any
 }
 
 export const Slider: React.FC<SliderProps> = ({
   data,
   activeSlide: initialSlide,
+  onAllIframesLoaded,
 }) => {
   const [activeSlide, setActiveSlide] = useState<number>(initialSlide);
+  const loadCount = useRef(0);
+
+const handleIframeLoad = () => {
+  loadCount.current += 1;
+  if (loadCount.current === data.length) {
+    onAllIframesLoaded?.();
+  }
+};
 
   const next = () =>
     activeSlide < data.length - 1 && setActiveSlide(activeSlide + 1);
@@ -70,7 +81,7 @@ export const Slider: React.FC<SliderProps> = ({
                 ...getStyles(i),
               }}
             >
-              <SliderContent {...item} />
+              <SliderContent {...item} onIframeLoad={handleIframeLoad}/>
             </div>
             <div
               className="reflection"

@@ -20,12 +20,13 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    margin-top: -50px;
 
     &__item {
       position: relative;
       cursor: pointer;
       transition: color 0.3s ease-in-out;
-      font-size: 20px;
+      font-size: 22px;
 
 
       &:after {

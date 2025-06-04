@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Slider } from "../UI/Slider/Slider";
-import './LatestReleases.scss'
+import "./LatestReleases.scss";
 
 const LatestReleases = () => {
+  const [loader, setLoader] = useState(true);
   const spotifyPlaylists = [
     {
       albumName: "Covers",
@@ -32,10 +34,14 @@ const LatestReleases = () => {
   return (
     <section className="latestReleases">
       <h3 className="latestReleases-title">MUSIC</h3>
-      <Slider data={spotifyPlaylists} activeSlide={0} />
+      {loader && <div className="loader"></div>}
+      <Slider
+        data={spotifyPlaylists}
+        activeSlide={0}
+        onAllIframesLoaded={() => setLoader(false)}
+      />
     </section>
   );
 };
 
 export default LatestReleases;
-

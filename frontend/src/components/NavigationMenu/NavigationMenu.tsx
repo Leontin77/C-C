@@ -105,7 +105,7 @@ export const NavigationMenu = () => {
             className="navigationMenu-list__item"
             onClick={() => scrollToSection("events")}
           >
-            Past Events
+            Highlights 
           </li>
         </Link>
         <Link to={ROUTES.HOME} state={{ scrollTo: "latest-releases" }}>
