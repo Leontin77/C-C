@@ -1,6 +1,6 @@
 import "./OurEvenets.scss";
 import ukMap from "../../assets/video/UKmap.png";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import data from "../../api/data.json";
 import { UpcomingEvents } from "../UpcomingEvents/UpcomingEvents";
@@ -12,7 +12,9 @@ const OurEvenets = () => {
   const [showContent, setShowContent] = useState(false);
   const [choosenCity, setChoosenCity] = useState("");
   const cityDataPast = data?.result?.pastEvents?.cities;
+  const [showHint, setShowHint] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const mapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
@@ -69,6 +71,22 @@ const OurEvenets = () => {
     }
   };
 
+  useEffect(() => {
+    const handleOutsideClick = (event: TouchEvent | MouseEvent) => {
+      if (zoomed && mapRef.current && !mapRef.current.contains(event.target as Node)) {
+        handleMouseLeave();
+      }
+    };
+  
+    document.addEventListener("touchstart", handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick); // на всяк випадок для планшетів/desktop
+  
+    return () => {
+      document.removeEventListener("touchstart", handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [zoomed]);
+
   return (
     <div className="upcomingEvents">
       <h3 className="upcomingEvents-title">UPCOMING EVENTS</h3>
@@ -89,10 +107,10 @@ const OurEvenets = () => {
               <>
                 <div
                   key={tab}
+                  ref={mapRef}
                   className={`map-container ${slideClass} ${
                     zoomed ? "zoom-in" : ""
                   } ${isFirstRender ? "visible" : ""}`}
-                  onMouseLeave={handleMouseLeave}
                 >
                   <div className="map-wrapper">
                     <img src={ukMap} alt="UK Map" />
@@ -194,11 +212,22 @@ const OurEvenets = () => {
             <div className="desc-container">
               <UpcomingEvents choosenCity={choosenCity} />
             </div>
+          ) : !isMobile ? (
+            <div className="selectCity">
+              <div className="arrows"></div>
+              <div className="text">Please select city on the map</div>
+            </div>
           ) : (
-            !isMobile && (
-              <div className="selectCity">
-                <div className="arrows"></div>
-                <div className="text">Please select city on the map</div>
+            showHint && (
+              <div
+                className="hint-overlay"
+                onClick={() => {
+                  setZoomed(true);
+                  setShowHint(false);
+                }}
+              >
+                <div className="hint-finger"></div>
+                <div className="hint-text">Tap a city</div>
               </div>
             )
           ))}

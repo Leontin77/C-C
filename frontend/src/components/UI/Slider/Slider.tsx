@@ -6,10 +6,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./Slider.scss";
-import AudioPlayerList from "../../AudioPlayerList/AudioPlayerList";
+import { SliderContent } from "../SliderContent/SliderContent";
+
+interface SlideItem {
+  albumName: string;
+  coverImageUrl: string;
+  embedUrl: string;
+  bgColor: string;
+}
 
 interface SliderProps {
-  data: [];
+  data: SlideItem[];
   activeSlide: number;
 }
 
@@ -53,30 +60,27 @@ export const Slider: React.FC<SliderProps> = ({
   return (
     <div className="slider-container">
       <div className="slideC">
-        {data &&
-          data.map((item: any, i: number) => {
-            return (
-              <React.Fragment key={item.albumName}>
-                <div
-                  className="slide"
-                  style={{
-                    background: item.bgColor,
-                    boxShadow: `0 5px 20px ${item.bgColor}30`,
-                    ...getStyles(i),
-                  }}
-                >
-                  <SliderContent {...item} />
-                </div>
-                <div
-                  className="reflection"
-                  style={{
-                    background: `linear-gradient(to bottom, ${item.bgColor}40, transparent)`,
-                    ...getStyles(i),
-                  }}
-                />
-              </React.Fragment>
-            );
-          })}
+        {data.map((item, i) => (
+          <React.Fragment key={item.albumName}>
+            <div
+              className="slide"
+              style={{
+                background: item.bgColor,
+                boxShadow: `0 5px 20px ${item.bgColor}30`,
+                ...getStyles(i),
+              }}
+            >
+              <SliderContent {...item} />
+            </div>
+            <div
+              className="reflection"
+              style={{
+                background: `linear-gradient(to bottom, ${item.bgColor}40, transparent)`,
+                ...getStyles(i),
+              }}
+            />
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="btns">
@@ -99,24 +103,3 @@ export const Slider: React.FC<SliderProps> = ({
   );
 };
 
-interface SlideItem {
-  albumName: string;
-  coverImageUrl: string;
-  audio: { name: string; url: string; albumName: string; }[];
-  bgColor: string;
-}
-
-const SliderContent: React.FC<SlideItem> = ({
-  albumName,
-  audio,
-  coverImageUrl,
-}) => {
-  return (
-    <div className="sliderContent">
-      <h2></h2>
-      <AudioPlayerList album={{ albumName, audio, coverImageUrl }} />
-    </div>
-  );
-};
-
-export default SliderContent;

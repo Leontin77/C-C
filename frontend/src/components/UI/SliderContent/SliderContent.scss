@@ -82,10 +82,6 @@
 .btns {
   padding-top: 130px;
   cursor: pointer;
-  @media screen and (max-width: 768px) {
-    padding-top: 70px;
-    padding-bottom: 30px;
-  }
 }
 
 .btns .btn {

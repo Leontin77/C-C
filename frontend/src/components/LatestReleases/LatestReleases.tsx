@@ -1,64 +1,41 @@
 import { Slider } from "../UI/Slider/Slider";
-import { useGetSongsQuery } from "../../services/songsApi.ts";
-import "react-jinke-music-player/assets/index.css";
-import "./LatestReleases.scss";
-import { BASE_URL } from "../../shared/const/url.ts";
-
-interface Song {
-  name: string;
-  url: string;
-  albumName: string;
-}
-
-interface Album {
-  albumName: string;
-  coverImageUrl: string;
-  audio: Song[];
-}
+import './LatestReleases.scss'
 
 const LatestReleases = () => {
-  const { data: songs, isLoading } = useGetSongsQuery();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const albumsMap: { [key: string]: Album } = {};
-
-  // @ts-expect-error asdasdasdasdasd
-  if (songs && songs?.data) {
-    // @ts-expect-error asdasdasdasdasd
-    songs?.data.forEach((item) => {
-      const albumName = item.album.title;
-      const coverImageUrl = `${BASE_URL}${item.album.cover[0].url}`;
-      const audio = item.audio.map((song) => ({
-        name: song.name,
-        url: `${BASE_URL}${song.url}`,
-      }));
-
-      if (albumsMap[albumName]) {
-        albumsMap[albumName].audio.push(...audio);
-      } else {
-        albumsMap[albumName] = {
-          albumName,
-          coverImageUrl,
-          audio,
-        };
-      }
-    });
-  }
-
-  const albums = Object.values(albumsMap);
+  const spotifyPlaylists = [
+    {
+      albumName: "Covers",
+      embedUrl:
+        "https://open.spotify.com/embed/album/6y5HsiDyAI8t9r2sWiSFtK?utm_source=generator",
+      coverImageUrl:
+        "https://i.scdn.co/image/ab67706f00000002c4e2e0baf9827a1a58cf26b8",
+      bgColor: "",
+    },
+    {
+      albumName: "Golden",
+      embedUrl:
+        "https://open.spotify.com/embed/album/7zurB06wtPLmlI59VTPVyk?utm_source=generator",
+      coverImageUrl:
+        "https://i.scdn.co/image/ab67706f000000028e8a76d73c8b0e9f13dc9e91",
+      bgColor: "",
+    },
+    {
+      albumName: "Navigator",
+      embedUrl:
+        "https://open.spotify.com/embed/album/6HToWW1UVOJGaaYdKMrK75?utm_source=generator",
+      coverImageUrl:
+        "https://i.scdn.co/image/ab67706f00000002a6e1c5e67985e1362dc98e4b",
+      bgColor: "",
+    },
+  ];
 
   return (
     <section className="latestReleases">
       <h3 className="latestReleases-title">MUSIC</h3>
-      <div className="latestReleases-content">
-        {/* @ts-expect-error asdasdasdasdasd */}
-        <Slider data={albums} activeSlide={0} />
-      </div>
+      <Slider data={spotifyPlaylists} activeSlide={0} />
     </section>
   );
 };
 
 export default LatestReleases;
+
