@@ -179,7 +179,9 @@ export const Footer = () => {
                 <li
                   className="container-list__item"
                   onClick={() =>
-                    window.scrollTo({ top: 500, behavior: "smooth" })
+                    setTimeout(() => {
+                      window.scrollTo({ top: 500, behavior: "smooth" });
+                    }, 500)
                   }
                 >
                   Highlights
@@ -189,7 +191,9 @@ export const Footer = () => {
                 <li
                   className="container-list__item"
                   onClick={() =>
-                    window.scrollTo({ top: 500, behavior: "smooth" })
+                    setTimeout(() => {
+                      window.scrollTo({ top: 500, behavior: "smooth" });
+                    }, 500)
                   }
                 >
                   About Us
