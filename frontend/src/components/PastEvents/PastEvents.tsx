@@ -1,10 +1,10 @@
 import "./PastEvents.scss";
 import ukMap from "../../assets/video/UKmap.png";
-import  { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { UpcomingEvents } from "../UpcomingEvents/UpcomingEvents";
 import { useGetPastEventsQuery } from "../../services/pastEventApi";
 import { BASE_URL } from "../../shared/const/url";
+import { PiHandTapLight } from "react-icons/pi";
 
 const PastEvents = () => {
   const [activeTab] = useState("passed");
@@ -13,7 +13,8 @@ const PastEvents = () => {
   const [showContent, setShowContent] = useState(false);
   const [choosenCity, setChoosenCity] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
+  const [showHint, setShowHint] = useState(true);
+  const mapRefPast = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
@@ -21,6 +22,32 @@ const PastEvents = () => {
     onResize();
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+
+  const handleMouseLeave = () => {
+    if (zoomed) {
+      setZoomed(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: TouchEvent | MouseEvent) => {
+      if (
+        zoomed &&
+        mapRefPast.current &&
+        !mapRefPast.current.contains(event.target as Node)
+      ) {
+        handleMouseLeave();
+      }
+    };
+
+    document.addEventListener("touchstart", handleOutsideClick);
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("touchstart", handleOutsideClick);
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [zoomed]);
 
   const { data: cityDataPast } = useGetPastEventsQuery(undefined);
 
@@ -66,12 +93,6 @@ const PastEvents = () => {
     setZoomed(true);
   };
 
-  const handleMouseLeave = () => {
-    if (zoomed) {
-      setZoomed(false);
-    }
-  };
-
   return (
     <div className="upcomingEvents">
       <div className="tab-content">
@@ -91,6 +112,7 @@ const PastEvents = () => {
               <>
                 <div
                   key={tab}
+                  ref={mapRefPast}
                   className={`map-container ${slideClass} ${
                     zoomed ? "zoom-in" : ""
                   } ${isFirstRender ? "visible" : ""}`}
@@ -150,59 +172,62 @@ const PastEvents = () => {
             )
           );
         })}
-        {activeTab === "upcoming" &&
+        {activeTab === "passed" &&
           showContent &&
+          cityDataPast?.data?.length &&
           (choosenCity ? (
-            <div className="desc-container">
-              <UpcomingEvents choosenCity={choosenCity} />
-            </div>
-          ) : (
+            cityDataPast?.data
+              ?.filter((city) => city.name === choosenCity)
+              ?.map((city) => {
+                return (
+                  <div className="desc-container">
+                    <div className="wrapper">
+                      <img
+                        className="desc-container__img"
+                        src={`${BASE_URL}${
+                          city.image1[0]?.formats?.medium?.url ||
+                          city.image1[0]?.url
+                        }`}
+                        alt=""
+                      />
+                      <div>{animatedText(city.description1)}</div>
+                    </div>
+
+                    <div className="wrapper">
+                      <div>{animatedText(city.description2)}</div>
+                      <img
+                        className="desc-container__img"
+                        src={`${BASE_URL}${
+                          city.image2[0]?.formats?.medium?.url ||
+                          city.image2[0]?.url
+                        }`}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                );
+              })
+          ) : !isMobile ? (
             <div className="selectCity">
               <div className="arrows"></div>
               <div className="text">Please select city on the map</div>
             </div>
-          ))}
-        {activeTab === "passed" &&
-          showContent &&
-          cityDataPast?.data?.length &&
-          (choosenCity
-            ? cityDataPast?.data
-                ?.filter((city) => city.name === choosenCity)
-                ?.map((city) => {
-                  return (
-                    <div className="desc-container">
-                      <div className="wrapper">
-                        <img
-                          className="desc-container__img"
-                          src={`${BASE_URL}${
-                            city.image1[0]?.formats?.medium?.url ||
-                            city.image1[0]?.url
-                          }`}
-                          alt=""
-                        />
-                        <div>{animatedText(city.description1)}</div>
-                      </div>
-
-                      <div className="wrapper">
-                        <div>{animatedText(city.description2)}</div>
-                        <img
-                          className="desc-container__img"
-                          src={`${BASE_URL}${
-                            city.image2[0]?.formats?.medium?.url ||
-                            city.image2[0]?.url
-                          }`}
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  );
-                })
-            : !isMobile && (
-                <div className="selectCity">
-                  <div className="arrows"></div>
-                  <div className="text">Please select city on the map</div>
+          ) : (
+            showHint && (
+              <div
+                className="hint-overlay"
+                onClick={() => {
+                  setZoomed(true);
+                  setShowHint(false);
+                }}
+              >
+                <div className="hint-finger">
+                  <PiHandTapLight className="hint-finger" />
                 </div>
-              ))}
+                <div className="hint-text">Tap a city</div>
+              </div>
+            )
+          ))}
       </div>
     </div>
   );

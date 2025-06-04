@@ -25,12 +25,12 @@ const Start = ({ onFinish }: { onFinish: () => void }) => {
 
   return (
     <motion.div
-      className="absolute inset-0 bg-black flex items-center justify-center z-50 w-full h-full"
+      className="absolute inset-0 bg-black flex items-center justify-center z-50 w-full h-full bg-transparent"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{ delay: 0.5, duration: 0.5 }}
     >
-      <h1 className="header-title center-title text-center max-w-screen-md w-full px-4">
+      <h3 className="header-titlee center-title text-center max-w-screen-md w-full px-4">
         {text.map((letter, i) => (
           <motion.span
             key={i}
@@ -42,7 +42,7 @@ const Start = ({ onFinish }: { onFinish: () => void }) => {
             {letter}
           </motion.span>
         ))}
-      </h1>
+      </h3>
     </motion.div>
   );
 };

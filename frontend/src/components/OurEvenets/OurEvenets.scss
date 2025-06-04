@@ -378,13 +378,11 @@ $peakopacity: 0.7;
   align-items: center;
   cursor: pointer;
   animation: fadeIn 0.5s ease-in-out;
+  border-radius: 12px;
 
   .hint-finger {
     width: 60px;
     height: 60px;
-    // background-image: url('/path-to-your-finger-icon.svg'); // або PNG
-    background-size: contain;
-    background-repeat: no-repeat;
     animation: bounce 1.2s infinite;
   }
 
@@ -403,7 +401,7 @@ $peakopacity: 0.7;
     transform: translateY(0);
   }
   50% {
-    transform: translateY(15px);
+    transform: translateY(10px);
   }
 }
 

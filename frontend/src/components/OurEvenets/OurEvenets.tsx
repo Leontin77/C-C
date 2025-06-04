@@ -1,9 +1,8 @@
 import "./OurEvenets.scss";
 import ukMap from "../../assets/video/UKmap.png";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import data from "../../api/data.json";
 import { UpcomingEvents } from "../UpcomingEvents/UpcomingEvents";
+import { PiHandTapLight } from "react-icons/pi";
 
 const OurEvenets = () => {
   const [activeTab] = useState("upcoming");
@@ -11,7 +10,6 @@ const OurEvenets = () => {
   const [zoomed, setZoomed] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [choosenCity, setChoosenCity] = useState("");
-  const cityDataPast = data?.result?.pastEvents?.cities;
   const [showHint, setShowHint] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const mapRef = useRef<HTMLDivElement | null>(null);
@@ -33,32 +31,6 @@ const OurEvenets = () => {
     }
   }, [activeTab]);
 
-  const animatedText = (text: string) => {
-    return (
-      <motion.span
-        initial="hidden"
-        animate="visible"
-        variants={{
-          visible: { transition: { staggerChildren: 0.02 } },
-        }}
-      >
-        {text.split("").map((letter, i) => (
-          <motion.span key={i} variants={letterAnimation} custom={i}>
-            {letter}
-          </motion.span>
-        ))}
-      </motion.span>
-    );
-  };
-
-  const letterAnimation = {
-    hidden: { opacity: 0, y: 10 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.01, duration: 0.2 },
-    }),
-  };
 
   const handleMarkerClick = (name: string) => {
     setChoosenCity(name);
@@ -73,14 +45,17 @@ const OurEvenets = () => {
 
   useEffect(() => {
     const handleOutsideClick = (event: TouchEvent | MouseEvent) => {
-      if (zoomed && mapRef.current && !mapRef.current.contains(event.target as Node)) {
+      if (
+        zoomed &&
+        mapRef.current &&
+        !mapRef.current.contains(event.target as Node)
+      ) {
         handleMouseLeave();
       }
     };
-  
+
     document.addEventListener("touchstart", handleOutsideClick);
-    document.addEventListener("mousedown", handleOutsideClick); // на всяк випадок для планшетів/desktop
-  
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("touchstart", handleOutsideClick);
       document.removeEventListener("mousedown", handleOutsideClick);
@@ -226,45 +201,12 @@ const OurEvenets = () => {
                   setShowHint(false);
                 }}
               >
-                <div className="hint-finger"></div>
+                <div className="hint-finger">
+                  <PiHandTapLight className="hint-finger"/>
+                </div>
                 <div className="hint-text">Tap a city</div>
               </div>
             )
-          ))}
-        {activeTab === "passed" &&
-          showContent &&
-          cityDataPast?.length &&
-          (choosenCity ? (
-            cityDataPast
-              ?.filter((city) => city.name === choosenCity)
-              ?.map((city) => {
-                return (
-                  <div className="desc-container">
-                    <div className="wrapper">
-                      <img
-                        className="desc-container__img"
-                        src={city.image1}
-                        alt=""
-                      />
-                      <div>{animatedText(city.description1)}</div>
-                    </div>
-
-                    <div className="wrapper">
-                      <div>{animatedText(city.description2)}</div>
-                      <img
-                        className="desc-container__img"
-                        src={city.image2}
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                );
-              })
-          ) : (
-            <div className="selectCity">
-              <div className="arrows"></div>
-              <div className="text">Please select city on the map</div>
-            </div>
           ))}
       </div>
     </div>

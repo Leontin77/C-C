@@ -138,7 +138,7 @@ export const Footer = () => {
               <Link to={ROUTES.HOME}>
                 <li
                   className="container-list__item"
-                  onClick={() => scrollToSection("home")}
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 >
                   Home
                 </li>
