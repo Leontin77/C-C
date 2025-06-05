@@ -25,6 +25,13 @@ import { openModal, closeModal } from "../../store/modal/modal.slice";
 import emailjs from "emailjs-com";
 import { Textarea } from "../UI/Textarea/Textarea";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+
+type FormValues = {
+  name: string;
+  email: string;
+  message: string;
+};
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -42,9 +49,6 @@ export const Footer = () => {
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState({ name: "", email: "", message: "" });
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
@@ -53,62 +57,6 @@ export const Footer = () => {
 
   const handleCloseModal = () => {
     dispatch(closeModal());
-  };
-
-  const validateForm = () => {
-    let valid = true;
-    const errors = { name: "", email: "", message: "" };
-
-    if (!name) {
-      errors.name = "Name is required.";
-      valid = false;
-    }
-    if (!email) {
-      errors.email = "Email is required.";
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Email is invalid.";
-      valid = false;
-    }
-    if (!message) {
-      errors.message = "Message is required.";
-      valid = false;
-    }
-
-    setErrors(errors);
-    return valid;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
-    const formData = { name, email, message };
-
-    try {
-      emailjs.init("OyEJgHok_8Ahju8_J");
-      emailjs
-        .send("service_wgm6mcn", "template_rn2y9ge", {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-        })
-        .then((response) => {
-          console.log("Email sent successfully", response);
-          toast.success("Email sent successfully");
-        })
-        .catch((error) => {
-          console.error("Error sending email", error);
-        });
-      handleCloseModal();
-
-      setName("");
-      setEmail("");
-      setMessage("");
-    } catch (error) {
-      console.error("Failed to send email", error);
-    }
   };
 
   useEffect(() => {
@@ -125,6 +73,32 @@ export const Footer = () => {
     spotify: <FaSpotify className="social-list-item" size="2em" />,
     applemusic: <SiApplemusic className="social-list-item" size="2em" />,
     tiktok: <FaTiktok className="social-list-item" size="2em" />,
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormValues>();
+
+  const onSubmit = (data: FormValues) => {
+    emailjs.init("OyEJgHok_8Ahju8_J");
+    emailjs
+      .send("service_wgm6mcn", "template_rn2y9ge", {
+        from_name: data.name,
+        from_email: data.email,
+        message: data.message,
+      })
+      .then(() => {
+        toast.success("Email sent successfully");
+        handleCloseModal();
+        reset(); 
+      })
+      .catch((error) => {
+        console.error("Error sending email", error);
+        toast.error("Failed to send email");
+      });
   };
 
   return (
@@ -271,31 +245,31 @@ export const Footer = () => {
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <h2>Contact Us</h2>
-        <form className="modal-input-form" onSubmit={handleSubmit}>
+        <form className="modal-input-form" onSubmit={handleSubmit(onSubmit)}>
           <Input
             label="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
+            {...register("name", { required: "Name is required" })}
           />
-          {errors.name && <p className="error">{errors.name}</p>}
+          {errors.name && <p className="error">{errors.name.message}</p>}
 
           <Input
             label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
             type="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Invalid email format",
+              },
+            })}
           />
-          {errors.email && <p className="error">{errors.email}</p>}
+          {errors.email && <p className="error">{errors.email.message}</p>}
 
           <Textarea
             label="Message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
+            {...register("message", { required: "Message is required" })}
           />
-          {errors.message && <p className="error">{errors.message}</p>}
+          {errors.message && <p className="error">{errors.message.message}</p>}
 
           <Button className="button" type="submit">
             Send

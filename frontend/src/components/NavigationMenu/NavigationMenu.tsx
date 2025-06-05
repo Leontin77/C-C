@@ -7,15 +7,18 @@ import { openModal, closeModal } from "../../store/modal/modal.slice";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
 import { Textarea } from "../UI/Textarea/Textarea";
-import { useState } from "react";
 import emailjs from "emailjs-com";
 import { RootState } from "../../store/store";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
+type FormValues = {
+  name: string;
+  email: string;
+  message: string;
+};
 
 export const NavigationMenu = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState({ name: "", email: "", message: "" });
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -34,59 +37,30 @@ export const NavigationMenu = () => {
     dispatch(closeModal());
   };
 
-  const validateForm = () => {
-    let valid = true;
-    const errors = { name: "", email: "", message: "" };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormValues>();
 
-    if (!name) {
-      errors.name = "Name is required.";
-      valid = false;
-    }
-    if (!email) {
-      errors.email = "Email is required.";
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Email is invalid.";
-      valid = false;
-    }
-    if (!message) {
-      errors.message = "Message is required.";
-      valid = false;
-    }
-
-    setErrors(errors);
-    return valid;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
-    const formData = { name, email, message };
-
-    try {
-      emailjs.init("OyEJgHok_8Ahju8_J");
-      emailjs
-        .send("service_wgm6mcn", "template_rn2y9ge", {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-        })
-        .then((response) => {
-          console.log("Email sent successfully", response);
-        })
-        .catch((error) => {
-          console.error("Error sending email", error);
-        });
-      handleCloseModal();
-
-      setName("");
-      setEmail("");
-      setMessage("");
-    } catch (error) {
-      console.error("Failed to send email", error);
-    }
+  const onSubmit = (data: FormValues) => {
+    emailjs.init("OyEJgHok_8Ahju8_J");
+    emailjs
+      .send("service_wgm6mcn", "template_rn2y9ge", {
+        from_name: data.name,
+        from_email: data.email,
+        message: data.message,
+      })
+      .then(() => {
+        toast.success("Email sent successfully");
+        handleCloseModal();
+        reset(); 
+      })
+      .catch((error) => {
+        console.error("Error sending email", error);
+        toast.error("Failed to send email");
+      });
   };
 
   return (
@@ -152,43 +126,52 @@ export const NavigationMenu = () => {
             Substack
           </a>
         </li>
+        <Link to={ROUTES.BOOK_US}>
+          <li
+            className="navigationMenu-list__item"
+            onClick={() => scrollToSection("about")}
+          >
+            Book Us
+          </li>
+        </Link>
         <li className="navigationMenu-list__item" onClick={handleOpenModal}>
           Contact Us
         </li>
 
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <h2>Contact Us</h2>
-          <form className="modal-input-form" onSubmit={handleSubmit}>
-            <Input
-              label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            {errors.name && <p className="error">{errors.name}</p>}
+        <h2>Contact Us</h2>
+        <form className="modal-input-form" onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            label="Name"
+            {...register("name", { required: "Name is required" })}
+          />
+          {errors.name && <p className="error">{errors.name.message}</p>}
 
-            <Input
-              label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              type="email"
-            />
-            {errors.email && <p className="error">{errors.email}</p>}
+          <Input
+            label="Email"
+            type="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Invalid email format",
+              },
+            })}
+          />
+          {errors.email && <p className="error">{errors.email.message}</p>}
 
-            <Textarea
-              label="Message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-            />
-            {errors.message && <p className="error">{errors.message}</p>}
+          <Textarea
+            label="Message"
+            {...register("message", { required: "Message is required" })}
+          />
+          {errors.message && <p className="error">{errors.message.message}</p>}
 
-            <Button className="button" type="submit">
-              Send
-            </Button>
-          </form>
-        </Modal>
+          <Button className="button" type="submit">
+            Send
+          </Button>
+        </form>
+      </Modal>
+
       </ul>
     </nav>
   );

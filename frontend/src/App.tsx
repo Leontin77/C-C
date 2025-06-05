@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage";
 import { AboutUs } from "./pages/AboutUs";
 import { Blog } from "./pages/Blog/Blog";
 import { BlogDetails } from "./pages/BlogDetails";
+import { BookUs } from "./pages/BookUs/BookUs";
 
 import { MainLayout } from "./shared/layouts/MainLayout";
 import { ROUTES } from "./shared/const/router";
@@ -30,6 +31,8 @@ const App: React.FC = () => {
           <Route path={ROUTES.BLOG} element={<Blog />} />
           <Route path={ROUTES.BLOG_DETAILS} element={<BlogDetails />} />
           <Route path={ROUTES.PASSED_EVENTS} element={<PassedEventsPage />} />
+          <Route path={ROUTES.BOOK_US} element={<BookUs />} />
+          
         </Route>
       </Routes>
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />

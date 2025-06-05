@@ -23,6 +23,7 @@
     "react-dom": "^19.0.0",
     "react-draggable": "^4.4.3",
     "react-h5-audio-player": "^3.10.0-rc.1",
+    "react-hook-form": "^7.57.0",
     "react-icons": "^5.5.0",
     "react-jinke-music-player": "^4.6.1",
     "react-redux": "^9.2.0",
