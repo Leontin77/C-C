@@ -52,9 +52,9 @@ export const Slider: React.FC<SliderProps> = ({
       touchEndX.current = e.changedTouches[0].screenX;
       if (touchStartX.current !== null && touchEndX.current !== null) {
         const diff = touchStartX.current - touchEndX.current;
-        const threshold = 50;
-        if (diff > threshold) next(); // swipe left
-        else if (diff < -threshold) prev(); // swipe right
+        const threshold = 20;
+        if (diff > threshold) next();
+        else if (diff < -threshold) prev();
       }
       touchStartX.current = null;
       touchEndX.current = null;
