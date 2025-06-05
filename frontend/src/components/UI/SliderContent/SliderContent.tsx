@@ -33,6 +33,8 @@ export const SliderContent: React.FC<SlideItem> = ({
       <h2>{albumName}</h2>
       <div className="iframe-wrapper">
         {!loaded && <div className="iframe-placeholder" />}
+        {/* 👇 Ось це нове — прозора swipe-зона */}
+        <div className="iframe-touch-layer" />
         <iframe
           style={{ borderRadius: "12px", background: "transparent" }}
           src={embedUrl}

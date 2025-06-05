@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronRight,
-  faChevronLeft,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import "./Slider.scss";
 import { SliderContent } from "../SliderContent/SliderContent";
-import { useRef } from "react";
 
 interface SlideItem {
   albumName: string;
@@ -31,7 +26,6 @@ export const Slider: React.FC<SliderProps> = ({
   const loadCount = useRef(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
-  const slideContainerRef = useRef<HTMLDivElement>(null);
 
   const handleIframeLoad = () => {
     loadCount.current += 1;
@@ -40,68 +34,74 @@ export const Slider: React.FC<SliderProps> = ({
     }
   };
 
-  useEffect(() => {
-    const container = slideContainerRef.current;
-    if (!container) return;
+  const next = () => {
+    if (activeSlide < data.length - 1) setActiveSlide((prev) => prev + 1);
+  };
 
+  const prev = () => {
+    if (activeSlide > 0) setActiveSlide((prev) => prev - 1);
+  };
+
+  useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartX.current = e.changedTouches[0].screenX;
+      touchStartX.current = e.touches[0].clientX;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      touchEndX.current = e.changedTouches[0].screenX;
+      touchEndX.current = e.changedTouches[0].clientX;
       if (touchStartX.current !== null && touchEndX.current !== null) {
-        const diff = touchStartX.current - touchEndX.current;
-        const threshold = 20;
-        if (diff > threshold) next();
-        else if (diff < -threshold) prev();
+        const delta = touchStartX.current - touchEndX.current;
+        if (delta > 20) next();
+        else if (delta < -20) prev();
       }
       touchStartX.current = null;
       touchEndX.current = null;
     };
 
-    container.addEventListener("touchstart", handleTouchStart);
-    container.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     return () => {
-      container.removeEventListener("touchstart", handleTouchStart);
-      container.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [activeSlide]);
 
-  const next = () =>
-    activeSlide < data.length - 1 && setActiveSlide(activeSlide + 1);
-  const prev = () => activeSlide > 0 && setActiveSlide(activeSlide - 1);
-
   const getStyles = (index: number) => {
-    if (activeSlide === index)
+    const isActive = activeSlide === index;
+    const common = {
+      opacity:
+        isActive || activeSlide - 1 === index || activeSlide + 1 === index
+          ? 1
+          : 0,
+      zIndex: isActive ? 10 : 7,
+    };
+
+    if (isActive) {
       return {
-        opacity: 1,
+        ...common,
         transform: "translateX(0px) translateZ(0px) rotateY(0deg)",
-        zIndex: 10,
       };
-    else if (activeSlide - 1 === index)
+    } else if (activeSlide - 1 === index) {
       return {
-        opacity: 1,
+        ...common,
         transform: "translateX(-240px) translateZ(-400px) rotateY(35deg)",
-        zIndex: 9,
       };
-    else if (activeSlide + 1 === index)
+    } else if (activeSlide + 1 === index) {
       return {
-        opacity: 1,
+        ...common,
         transform: "translateX(240px) translateZ(-400px) rotateY(-35deg)",
-        zIndex: 9,
       };
-    else
+    } else {
       return {
-        opacity: 0,
+        ...common,
         transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
-        zIndex: 7,
       };
+    }
   };
 
   return (
-    <div className="slider-container" ref={slideContainerRef}>
+    <div className="slider-container">
       <div className="slideC">
         {data.map((item, i) => (
           <React.Fragment key={item.albumName}>

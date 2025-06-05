@@ -130,3 +130,32 @@
   50% { opacity: 0.8; }
   100% { opacity: 0.4; }
 }
+
+.iframe-wrapper {
+  position: relative;
+}
+
+.iframe-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: transparent;
+  touch-action: pan-y;
+}
+
+.iframe-overlay.hidden {
+  display: none;
+}
+
+.iframe-wrapper {
+  position: relative;
+}
+
+.iframe-touch-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: transparent;
+  touch-action: pan-y;
+  pointer-events: auto;
+}
