@@ -102,10 +102,9 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
             About Us
           </li>
         </Link>
-        <Link to={ROUTES.BOOK_US} state={{ scrollTo: "merchandise" }}>
+        <Link to={ROUTES.BOOK_US}>
           <li
             className="burgerMenu-list__item"
-            onClick={() => scrollToSection("merchandise")}
           >
             Book Us
           </li>

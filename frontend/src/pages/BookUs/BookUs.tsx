@@ -27,18 +27,23 @@ const eventOptions = [
 ];
 
 const timeOptions = Array.from({ length: 21 }, (_, i) => {
-    const hours = 10 + Math.floor(i / 2);
-    const minutes = i % 2 === 0 ? "00" : "30";
-    const label = `${hours.toString().padStart(2, "0")}:${minutes}`;
-    return { label, value: label };
-  });
+  const hours = 10 + Math.floor(i / 2);
+  const minutes = i % 2 === 0 ? "00" : "30";
+  const label = `${hours.toString().padStart(2, "0")}:${minutes}`;
+  return { label, value: label };
+});
 
 export const BookUs = () => {
-  const { register, handleSubmit, reset, control } = useForm<BookingFormData>();
+  const today = new Date().toISOString().split("T")[0];
+  const { register, handleSubmit, reset, control } = useForm<BookingFormData>({
+    defaultValues: {
+      eventDate: today,
+    },
+  });
 
   useEffect(() => {
     emailjs.init("OyEJgHok_8Ahju8_J");
-  }, [])
+  }, []);
 
   const onSubmit = (data: BookingFormData) => {
     const templateParams = {
@@ -54,10 +59,10 @@ export const BookUs = () => {
 
     emailjs
       .send(
-        "service_wgm6mcn",        
-        "template_ane1iaz",       
+        "service_wgm6mcn",
+        "template_ane1iaz",
         templateParams,
-        "OyEJgHok_8Ahju8_J"       
+        "OyEJgHok_8Ahju8_J"
       )
       .then(() => {
         toast.success("Email sent successfully");
@@ -77,15 +82,18 @@ export const BookUs = () => {
           Planning a wedding, corporate party, birthday, or any special event?
           Let us bring the music and energy to your celebration! We are a live
           band available for private and public events. Whether it’s an intimate
-          wedding, a vibrant birthday party, or a large corporate gathering —
-          we create unforgettable experiences with our performance. Simply fill
-          in the form below to check our availability and we’ll get back to you
+          wedding, a vibrant birthday party, or a large corporate gathering — we
+          create unforgettable experiences with our performance. Simply fill in
+          the form below to check our availability and we’ll get back to you
           soon. Let’s make your event truly special — with live music that moves
           people.
         </div>
       </div>
       <form className="bookingForm" onSubmit={handleSubmit(onSubmit)}>
-        <Input label="Full Name" {...register("fullName", { required: true })} />
+        <Input
+          label="Full Name"
+          {...register("fullName", { required: true })}
+        />
         <CustomSelect
           name="eventType"
           control={control}
@@ -93,7 +101,11 @@ export const BookUs = () => {
           placeholder="Select event type"
           rules={{ required: true }}
         />
-        <Input label="" type="date" {...register("eventDate", { required: true })} />
+        <Input
+          label=""
+          type="date"
+          {...register("eventDate", { required: true })}
+        />
         <CustomSelect
           name="time"
           control={control}
@@ -101,11 +113,24 @@ export const BookUs = () => {
           placeholder="Preferred Time"
           rules={{ required: true }}
         />
-        <Input label="Location / Venue" {...register("location", { required: true })} />
-        <Input label="Phone Number" type="tel" {...register("phone", { required: true })} />
+        <Input
+          label="Location / Venue"
+          {...register("location", { required: true })}
+        />
+        <Input
+          label="Phone Number"
+          type="tel"
+          {...register("phone", { required: true })}
+        />
         <Input label="Email" type="email" {...register("email")} />
         <Textarea label="Additional Notes or Requests" {...register("notes")} />
-        <button className="button" type="submit" onClick={() => console.log("Clicked test button!")}>Send</button>
+        <button
+          className="button"
+          type="submit"
+          onClick={() => console.log("Clicked test button!")}
+        >
+          Send
+        </button>
       </form>
     </section>
   );
