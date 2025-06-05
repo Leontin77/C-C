@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
@@ -19,7 +19,7 @@ interface SlideItem {
 interface SliderProps {
   data: SlideItem[];
   activeSlide: number;
-  onAllIframesLoaded: any
+  onAllIframesLoaded: any;
 }
 
 export const Slider: React.FC<SliderProps> = ({
@@ -29,13 +29,45 @@ export const Slider: React.FC<SliderProps> = ({
 }) => {
   const [activeSlide, setActiveSlide] = useState<number>(initialSlide);
   const loadCount = useRef(0);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const slideContainerRef = useRef<HTMLDivElement>(null);
 
-const handleIframeLoad = () => {
-  loadCount.current += 1;
-  if (loadCount.current === data.length) {
-    onAllIframesLoaded?.();
-  }
-};
+  const handleIframeLoad = () => {
+    loadCount.current += 1;
+    if (loadCount.current === data.length) {
+      onAllIframesLoaded?.();
+    }
+  };
+
+  useEffect(() => {
+    const container = slideContainerRef.current;
+    if (!container) return;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.changedTouches[0].screenX;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndX.current = e.changedTouches[0].screenX;
+      if (touchStartX.current !== null && touchEndX.current !== null) {
+        const diff = touchStartX.current - touchEndX.current;
+        const threshold = 50;
+        if (diff > threshold) next(); // swipe left
+        else if (diff < -threshold) prev(); // swipe right
+      }
+      touchStartX.current = null;
+      touchEndX.current = null;
+    };
+
+    container.addEventListener("touchstart", handleTouchStart);
+    container.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      container.removeEventListener("touchstart", handleTouchStart);
+      container.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [activeSlide]);
 
   const next = () =>
     activeSlide < data.length - 1 && setActiveSlide(activeSlide + 1);
@@ -69,7 +101,7 @@ const handleIframeLoad = () => {
   };
 
   return (
-    <div className="slider-container">
+    <div className="slider-container" ref={slideContainerRef}>
       <div className="slideC">
         {data.map((item, i) => (
           <React.Fragment key={item.albumName}>
@@ -81,7 +113,7 @@ const handleIframeLoad = () => {
                 ...getStyles(i),
               }}
             >
-              <SliderContent {...item} onIframeLoad={handleIframeLoad}/>
+              <SliderContent {...item} onIframeLoad={handleIframeLoad} />
             </div>
             <div
               className="reflection"
@@ -113,4 +145,3 @@ const handleIframeLoad = () => {
     </div>
   );
 };
-
