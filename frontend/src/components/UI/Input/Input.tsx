@@ -9,10 +9,11 @@ interface FloatingLabelInputProps {
   required?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, FloatingLabelInputProps>(
-  ({ label, id, type = "text", name, required = false, value, onChange, ...rest }, ref) => {
+  ({ label, id, type = "text", name, required = false, value, onChange, className, ...rest }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     console.log(value, onChange);
 
@@ -33,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement, FloatingLabelInputProps>(
           onFocus={handleFocus}
           onBlur={handleBlur}
           required={required}
-          className="input-field"
+          className={`input-field ${className}`}
           ref={ref}
           {...rest} 
         />

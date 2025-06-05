@@ -105,6 +105,7 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
         <Link to={ROUTES.BOOK_US}>
           <li
             className="burgerMenu-list__item"
+            onClick={() => setOpenMenu(false)}
           >
             Book Us
           </li>

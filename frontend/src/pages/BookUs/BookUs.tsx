@@ -105,6 +105,7 @@ export const BookUs = () => {
           label=""
           type="date"
           {...register("eventDate", { required: true })}
+          className='input-date'
         />
         <CustomSelect
           name="time"
