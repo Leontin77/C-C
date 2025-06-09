@@ -18,13 +18,13 @@ interface BookingFormData {
   notes: string;
 }
 
-const eventOptions = [
-  { label: "Wedding", value: "wedding" },
-  { label: "Birthday", value: "birthday" },
-  { label: "Corporate", value: "corporate" },
-  { label: "Festival", value: "festival" },
-  { label: "Other", value: "other" },
-];
+// const eventOptions = [
+//   { label: "Wedding", value: "wedding" },
+//   { label: "Birthday", value: "birthday" },
+//   { label: "Corporate", value: "corporate" },
+//   { label: "Festival", value: "festival" },
+//   { label: "Other", value: "other" },
+// ];
 
 const timeOptions = Array.from({ length: 21 }, (_, i) => {
   const hours = 10 + Math.floor(i / 2);
@@ -77,7 +77,7 @@ export const BookUs = () => {
   return (
     <section className="bookUs">
       <div className="bookUs-container">
-        <h3 className="bookUs-title">Bookings</h3>
+        <h3 className="bookUs-title">Booking</h3>
         <div className="bookUs-descr">
           Planning a wedding, corporate party, birthday, or any special event?
           Let us bring the music and energy to your celebration! We are a live
@@ -94,13 +94,13 @@ export const BookUs = () => {
           label="Full Name"
           {...register("fullName", { required: true })}
         />
-        <CustomSelect
+        {/* <CustomSelect
           name="eventType"
           control={control}
           options={eventOptions}
           placeholder="Select event type"
           rules={{ required: true }}
-        />
+        /> */}
         <Input
           label=""
           type="date"

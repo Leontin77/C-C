@@ -134,6 +134,7 @@ $peakopacity: 0.7;
       display: flex;
       width: 100%;
       align-items: center;
+      justify-content: space-between;
 
       img {
         width: 40%;
@@ -141,7 +142,7 @@ $peakopacity: 0.7;
 
       div {
         display: block;
-        width: 55%;
+        width: 50%;
         font-size: 20px;
         @media screen and (max-width: 768px) {
           font-size: 12px;

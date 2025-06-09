@@ -131,7 +131,7 @@ export const NavigationMenu = () => {
             className="navigationMenu-list__item"
             onClick={() => scrollToSection("about")}
           >
-            Book Us
+            Booking
           </li>
         </Link>
         <li className="navigationMenu-list__item" onClick={handleOpenModal}>
