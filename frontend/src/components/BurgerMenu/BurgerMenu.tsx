@@ -107,7 +107,7 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
             className="burgerMenu-list__item"
             onClick={() => setOpenMenu(false)}
           >
-            Booking
+            Bookings
           </li>
         </Link>
         <li

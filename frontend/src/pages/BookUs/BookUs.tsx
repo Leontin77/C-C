@@ -18,13 +18,13 @@ interface BookingFormData {
   notes: string;
 }
 
-// const eventOptions = [
-//   { label: "Wedding", value: "wedding" },
-//   { label: "Birthday", value: "birthday" },
-//   { label: "Corporate", value: "corporate" },
-//   { label: "Festival", value: "festival" },
-//   { label: "Other", value: "other" },
-// ];
+const eventOptions = [
+  { label: "Wedding", value: "wedding" },
+  { label: "Birthday", value: "birthday" },
+  { label: "Corporate", value: "corporate" },
+  { label: "Festival", value: "festival" },
+  { label: "Other", value: "other" },
+];
 
 const timeOptions = Array.from({ length: 21 }, (_, i) => {
   const hours = 10 + Math.floor(i / 2);
@@ -42,7 +42,7 @@ export const BookUs = () => {
   });
 
   useEffect(() => {
-    emailjs.init("OyEJgHok_8Ahju8_J");
+    emailjs.init("Evp7gabuR6nPtX26U");
   }, []);
 
   const onSubmit = (data: BookingFormData) => {
@@ -59,10 +59,10 @@ export const BookUs = () => {
 
     emailjs
       .send(
-        "service_wgm6mcn",
-        "template_ane1iaz",
+        "service_qu45ot8",
+        "template_yxu648s",
         templateParams,
-        "OyEJgHok_8Ahju8_J"
+        "Evp7gabuR6nPtX26U"
       )
       .then(() => {
         toast.success("Email sent successfully");
@@ -77,16 +77,14 @@ export const BookUs = () => {
   return (
     <section className="bookUs">
       <div className="bookUs-container">
-        <h3 className="bookUs-title">Booking</h3>
+        <h3 className="bookUs-title">Bookings</h3>
         <div className="bookUs-descr">
-          Planning a wedding, corporate party, birthday, or any special event?
-          Let us bring the music and energy to your celebration! We are a live
-          band available for private and public events. Whether it’s an intimate
-          wedding, a vibrant birthday party, or a large corporate gathering — we
-          create unforgettable experiences with our performance. Simply fill in
-          the form below to check our availability and we’ll get back to you
-          soon. Let’s make your event truly special — with live music that moves
-          people.
+          We love playing in unique spaces and for intimate gatherings, whether
+          it’s somewhere stripped back and atmospheric or grand and echoey. If
+          you're putting something special together and think our music could be
+          part of it, we'd love to hear from you. Drop us a message with a few
+          details — where, when and what you're dreaming up — and we’ll get back
+          to you as soon as we can.
         </div>
       </div>
       <form className="bookingForm" onSubmit={handleSubmit(onSubmit)}>
@@ -94,18 +92,18 @@ export const BookUs = () => {
           label="Full Name"
           {...register("fullName", { required: true })}
         />
-        {/* <CustomSelect
+        <CustomSelect
           name="eventType"
           control={control}
           options={eventOptions}
           placeholder="Select event type"
           rules={{ required: true }}
-        /> */}
+        />
         <Input
           label=""
           type="date"
           {...register("eventDate", { required: true })}
-          className='input-date'
+          className="input-date"
         />
         <CustomSelect
           name="time"

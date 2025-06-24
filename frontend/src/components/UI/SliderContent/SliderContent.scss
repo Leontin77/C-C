@@ -159,3 +159,7 @@
   touch-action: pan-y;
   pointer-events: auto;
 }
+
+.iframe-touch-layer.hidden {
+  display: none;
+}

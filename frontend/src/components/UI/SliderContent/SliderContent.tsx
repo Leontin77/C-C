@@ -16,6 +16,7 @@ export const SliderContent: React.FC<SlideItem> = ({
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [loaded, setLoaded] = useState(false);
+  const [touchLayerActive, setTouchLayerActive] = useState(true);
 
   const handleLoad = () => {
     setLoaded(true);
@@ -33,8 +34,10 @@ export const SliderContent: React.FC<SlideItem> = ({
       <h2>{albumName}</h2>
       <div className="iframe-wrapper">
         {!loaded && <div className="iframe-placeholder" />}
-        {/* 👇 Ось це нове — прозора swipe-зона */}
-        <div className="iframe-touch-layer" />
+        <div
+          className={`iframe-touch-layer ${!touchLayerActive ? "hidden" : ""}`}
+          onClick={() => setTouchLayerActive(false)}
+        />
         <iframe
           style={{ borderRadius: "12px", background: "transparent" }}
           src={embedUrl}
