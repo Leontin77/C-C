@@ -45,9 +45,9 @@ export const NavigationMenu = () => {
   } = useForm<FormValues>();
 
   const onSubmit = (data: FormValues) => {
-    emailjs.init("OyEJgHok_8Ahju8_J");
+    emailjs.init("Evp7gabuR6nPtX26U");
     emailjs
-      .send("service_wgm6mcn", "template_rn2y9ge", {
+      .send("service_wgm6mcn", "template_e4k82ye", {
         from_name: data.name,
         from_email: data.email,
         message: data.message,
