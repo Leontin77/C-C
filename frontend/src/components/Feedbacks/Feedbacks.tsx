@@ -61,7 +61,7 @@ export const Feedbacks = ({ autoplay }: FeedbacksProps) => {
                   </div>
                   <div className="name">
                     <span>{item.name} </span>
-                    <span>{item.age} years</span>
+                    <span>{item.age}</span>
                   </div>
                 </div>
               </div>
