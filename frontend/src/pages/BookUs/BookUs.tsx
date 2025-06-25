@@ -18,13 +18,13 @@ interface BookingFormData {
   notes: string;
 }
 
-const eventOptions = [
-  { label: "Wedding", value: "wedding" },
-  { label: "Birthday", value: "birthday" },
-  { label: "Corporate", value: "corporate" },
-  { label: "Festival", value: "festival" },
-  { label: "Other", value: "other" },
-];
+// const eventOptions = [
+//   { label: "Wedding", value: "wedding" },
+//   { label: "Birthday", value: "birthday" },
+//   { label: "Corporate", value: "corporate" },
+//   { label: "Festival", value: "festival" },
+//   { label: "Other", value: "other" },
+// ];
 
 const timeOptions = Array.from({ length: 21 }, (_, i) => {
   const hours = 10 + Math.floor(i / 2);
@@ -48,7 +48,7 @@ export const BookUs = () => {
   const onSubmit = (data: BookingFormData) => {
     const templateParams = {
       full_name: data.fullName,
-      event_type: data.eventType,
+      // event_type: data.eventType,
       event_date: data.eventDate,
       time: data.time,
       location: data.location,
@@ -92,13 +92,13 @@ export const BookUs = () => {
           label="Full Name"
           {...register("fullName", { required: true })}
         />
-        <CustomSelect
+        {/* <CustomSelect
           name="eventType"
           control={control}
           options={eventOptions}
           placeholder="Select event type"
           rules={{ required: true }}
-        />
+        /> */}
         <Input
           label=""
           type="date"
