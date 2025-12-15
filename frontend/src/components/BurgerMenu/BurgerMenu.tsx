@@ -86,14 +86,14 @@ export const BurgerMenu = ({ isOpen, setOpenMenu }: BurgerMeuProps) => {
             Home
           </li>
         </Link>
-        <Link to={ROUTES.PASSED_EVENTS}>
+        {/* <Link to={ROUTES.PASSED_EVENTS}>
           <li
             className="burgerMenu-list__item"
             onClick={() => scrollToSection("events")}
           >
             Highlights 
           </li>
-        </Link>
+        </Link> */}
         <Link to={ROUTES.ABOUT_US}>
           <li
             className="burgerMenu-list__item"

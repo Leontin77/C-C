@@ -74,14 +74,14 @@ export const NavigationMenu = () => {
             Home
           </li>
         </Link>
-        <Link to={ROUTES.PASSED_EVENTS}>
+        {/* <Link to={ROUTES.PASSED_EVENTS}>
           <li
             className="navigationMenu-list__item"
             onClick={() => scrollToSection("events")}
           >
             Highlights 
           </li>
-        </Link>
+        </Link> */}
         <Link to={ROUTES.HOME} state={{ scrollTo: "latest-releases" }}>
           <li
             className="navigationMenu-list__item"
